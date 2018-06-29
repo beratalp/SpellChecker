@@ -6,52 +6,76 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class WelcomeScreen {
+public class WelcomeScreen extends SpellChecker {
     public static void main(String[] args) throws IOException {
         String fileName = "recents.txt";
         File recentsFile = new File(fileName);
         ArrayList<String> recentsArray = new ArrayList<String>();
         Scanner fileScan = new Scanner(recentsFile);
-        SpellChecker spellCheck = new SpellChecker();
-        while(fileScan.hasNext()){
+        while (fileScan.hasNext()) {
             recentsArray.add(fileScan.nextLine());
         }
+        if(recentsArray.size() == 0){
+            recentsArray.add("No recent files");
+        }
         JFrame frame = new JFrame();
-        frame.setSize(400,300);
-        frame.setTitle("Spell Investigator " + spellCheck.getVERSION());
+        frame.setSize(600, 500);
+        frame.setTitle("Spell Investigator " + VERSION);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         String[] recents = new String[recentsArray.size()];
-        for(int i = 0; i < recentsArray.size(); i++){
+        for (int i = 0; i < recentsArray.size(); i++) {
             recents[i] = recentsArray.get(i);
         }
-        BufferedImage logo = ImageIO.read(new File("logo.jpeg"));
+        BufferedImage logo = ImageIO.read(new File("logo.png"));
         JList<String> recentList = new JList<String>(recents);
         JPanel panel = new JPanel();
-        JLabel recentLabel = new JLabel("Recent Files: ");
+        JButton newButton = new JButton("Create a New File");
+        JButton browseButton = new JButton("Browse...");
+        JLabel recentLabel = new JLabel("Recent Files: ",JLabel.CENTER);
+        recentLabel.setForeground(Color.white);
         JLabel logoLabel = new JLabel(new ImageIcon(logo));
+        JCheckBox onlineBox = new JCheckBox("Online Mode");
+        onlineBox.setBackground(Color.decode("#455A64"));
+        onlineBox.setForeground(Color.white);
+        JButton helpButton = new JButton("About & Help");
         panel.setBackground(Color.decode("#455A64"));
-        GridBagLayout layout = new GridBagLayout();
-        GridBagConstraints recentListC = new GridBagConstraints();
-        GridBagConstraints newButtonC = new GridBagConstraints();
-        GridBagConstraints recentLabelC = new GridBagConstraints();
-        GridBagConstraints logoC = new GridBagConstraints();
-        recentListC.gridx = 0;
-        recentListC.gridy = 1;
-        recentListC.fill = GridBagConstraints.BOTH;
-        recentLabelC.gridheight = GridBagConstraints.REMAINDER;
-        recentLabelC.gridx = 0;
-        recentLabelC.gridy = 0;
-        logoC.gridx = 1;
-        logoC.gridy = 0;
+        GroupLayout layout = new GroupLayout(panel);
         panel.setLayout(layout);
-        panel.add(recentLabel, recentLabelC);
-        panel.add(recentList,recentListC);
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
+        layout.setHorizontalGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                        .addComponent(recentList, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                        .addComponent(recentLabel, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                )
+                .addGroup(layout.createParallelGroup()
+                        .addComponent(logoLabel,GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+                        .addComponent(newButton, GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+                        .addComponent(browseButton, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE,368, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(onlineBox, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(helpButton, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                        )
+                )
+        );
+        layout.linkSize(SwingConstants.HORIZONTAL, newButton, browseButton);
+        layout.setVerticalGroup(layout.createSequentialGroup()
+                .addComponent(recentLabel)
+                .addGroup(layout.createParallelGroup()
+                        .addComponent(recentList, GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(logoLabel, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(newButton)
+                                .addComponent(browseButton)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(helpButton)
+                                        .addComponent(onlineBox)
+                                )
+                        )
+                )
+        );
         frame.add(panel);
-        JButton newButton = new JButton("Create a new file");
-        newButtonC.gridx = 1;
-        newButtonC.gridy = 1;
-        panel.add(newButton, newButtonC);
-        panel.add(logoLabel, logoC);
         frame.setVisible(true);
     }
 }

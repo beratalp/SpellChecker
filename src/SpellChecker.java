@@ -1,10 +1,3 @@
-public class SpellChecker {
-    private final String VERSION = "0.1";
-    public SpellChecker(){
-
-    }
-
-    public String getVERSION(){
-        return VERSION;
-    }
+public abstract class SpellChecker {
+    final static String VERSION = "0.1";
 }
