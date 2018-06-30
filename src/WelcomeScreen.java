@@ -5,10 +5,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.nio.file.NoSuchFileException;
 import java.util.*;
 
 public class WelcomeScreen extends SpellChecker {
-    public static void main(String[] args) throws IOException, InterruptedException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public static void main(String[] args) throws IOException, InterruptedException{
         String fileName = "recents.txt";
         File recentsFile = new File(fileName);
         ArrayList<String> recentsArray = new ArrayList<String>();
