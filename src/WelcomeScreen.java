@@ -22,6 +22,7 @@ public class WelcomeScreen extends SpellChecker {
         frame.setSize(600, 500);
         frame.setTitle("Spell Inspector " + VERSION);
         frame.setResizable(false);
+        //OK
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         String[] recents = new String[recentsArray.size()];
         for (int i = 0; i < recentsArray.size(); i++) {
