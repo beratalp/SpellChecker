@@ -37,6 +37,9 @@ public class WelcomeScreen extends SpellChecker {
         recentLabel.setForeground(Color.white);
         JLabel logoLabel = new JLabel(new ImageIcon(logo));
         JCheckBox onlineBox = new JCheckBox("Online Mode");
+        if(SpellCheckerOnline.isConnectionWorks()){
+            onlineBox.setEnabled(false);
+        }
         onlineBox.setBackground(Color.decode("#455A64"));
         onlineBox.setForeground(Color.white);
         JButton helpButton = new JButton("About & Help");
