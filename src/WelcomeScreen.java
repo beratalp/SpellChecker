@@ -4,10 +4,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.*;
 
 public class WelcomeScreen extends SpellChecker {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, UnknownHostException {
         String fileName = "recents.txt";
         File recentsFile = new File(fileName);
         ArrayList<String> recentsArray = new ArrayList<String>();
@@ -37,7 +38,7 @@ public class WelcomeScreen extends SpellChecker {
         recentLabel.setForeground(Color.white);
         JLabel logoLabel = new JLabel(new ImageIcon(logo));
         JCheckBox onlineBox = new JCheckBox("Online Mode");
-        if(SpellCheckerOnline.isConnectionWorks()){
+        if(!SpellCheckerOnline.isConnectionWorks()){
             onlineBox.setEnabled(false);
         }
         onlineBox.setBackground(Color.decode("#455A64"));
