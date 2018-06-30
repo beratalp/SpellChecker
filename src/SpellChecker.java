@@ -4,4 +4,5 @@ import java.net.UnknownHostException;
 
 public abstract class SpellChecker {
     final static String VERSION = "0.1";
+    final static String APPNAME = "Spell Inspector";
 }

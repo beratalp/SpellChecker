@@ -8,7 +8,7 @@ import java.net.UnknownHostException;
 import java.util.*;
 
 public class WelcomeScreen extends SpellChecker {
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException, InterruptedException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         String fileName = "recents.txt";
         File recentsFile = new File(fileName);
         ArrayList<String> recentsArray = new ArrayList<String>();
@@ -21,8 +21,11 @@ public class WelcomeScreen extends SpellChecker {
         }
         JFrame frame = new JFrame();
         frame.setSize(600, 500);
-        frame.setTitle("Spell Inspector " + VERSION);
+        frame.setTitle(APPNAME + " " + VERSION);
         frame.setResizable(false);
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        SwingUtilities.updateComponentTreeUI(frame);
+
         //OK
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         String[] recents = new String[recentsArray.size()];
