@@ -8,7 +8,7 @@ import java.net.UnknownHostException;
 import java.util.*;
 
 public class WelcomeScreen extends SpellChecker {
-    public static void main(String[] args) throws IOException, UnknownHostException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         String fileName = "recents.txt";
         File recentsFile = new File(fileName);
         ArrayList<String> recentsArray = new ArrayList<String>();
