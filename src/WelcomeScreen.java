@@ -20,7 +20,7 @@ public class WelcomeScreen extends SpellChecker {
         }
         JFrame frame = new JFrame();
         frame.setSize(600, 500);
-        frame.setTitle("Spell Investigator " + VERSION);
+        frame.setTitle("Spell Inspector " + VERSION);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         String[] recents = new String[recentsArray.size()];
         for (int i = 0; i < recentsArray.size(); i++) {
