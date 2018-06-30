@@ -23,9 +23,6 @@ public class WelcomeScreen extends SpellChecker {
         frame.setSize(600, 500);
         frame.setTitle(APPNAME + " " + VERSION);
         frame.setResizable(false);
-        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        SwingUtilities.updateComponentTreeUI(frame);
-
         //OK
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         String[] recents = new String[recentsArray.size()];
