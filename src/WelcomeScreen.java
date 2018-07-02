@@ -58,7 +58,7 @@ public class WelcomeScreen extends SpellChecker {
                 .addGroup(layout.createParallelGroup()
                         .addComponent(logoLabel,GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
                         .addComponent(newButton, GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
-                        .addComponent(browseButton, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE,368, Short.MAX_VALUE)
+                        .addComponent(browseButton, GroupLayout.DEFAULT_SIZE,368, Short.MAX_VALUE)
                         .addGroup(layout.createSequentialGroup()
                                 .addComponent(onlineBox, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(helpButton, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
