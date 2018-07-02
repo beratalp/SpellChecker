@@ -1,0 +1,12 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>openIcon.png</file>
+    <file>addFileIcon.png</file>
+    <file>autoIcon.png</file>
+    <file>decreaseIcon.png</file>
+    <file>increaseIcon.png</file>
+    <file>saveIcon.png</file>
+    <file>spellCheckIcon.png</file>
+    <file>addFileIcon.png</file>
+  </qresource>
+</RCC>
