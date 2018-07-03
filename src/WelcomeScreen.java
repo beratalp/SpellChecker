@@ -39,6 +39,15 @@ public class WelcomeScreen extends SpellChecker {
         JPanel panel = new JPanel();
         JButton newButton = new JButton("Create a New File");
         JButton browseButton = new JButton("Browse...");
+        JFileChooser fc = new JFileChooser();
+        browseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fc.showOpenDialog(frame);
+                File browseFile = fc.getSelectedFile();
+                frame.setVisible(false);
+            }
+        });
         JLabel recentLabel = new JLabel("Recent Files: ",JLabel.CENTER);
         recentLabel.setForeground(Color.white);
         JLabel logoLabel = new JLabel(new ImageIcon(logo));
@@ -88,11 +97,5 @@ public class WelcomeScreen extends SpellChecker {
         );
         frame.add(panel);
         frame.setVisible(true);
-        class BrowseEvent implements ActionListener{
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser fc = new JFileChooser();
-            }
-        }
     }
 }
