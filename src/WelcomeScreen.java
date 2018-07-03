@@ -1,11 +1,11 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.UnknownHostException;
-import java.nio.file.NoSuchFileException;
 import java.util.*;
 
 public class WelcomeScreen extends SpellChecker {
@@ -22,6 +22,10 @@ public class WelcomeScreen extends SpellChecker {
         }
         JFrame frame = new JFrame();
         frame.setSize(600, 500);
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+        frame.setLocation(x, y);
         frame.setTitle(APPNAME + " " + VERSION);
         frame.setResizable(false);
         //OK
@@ -84,5 +88,11 @@ public class WelcomeScreen extends SpellChecker {
         );
         frame.add(panel);
         frame.setVisible(true);
+        class BrowseEvent implements ActionListener{
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fc = new JFileChooser();
+            }
+        }
     }
 }
