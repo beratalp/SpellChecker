@@ -43,9 +43,11 @@ public class WelcomeScreen extends SpellChecker {
         browseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fc.showOpenDialog(frame);
+                int returnVal = fc.showOpenDialog(frame);
                 File browseFile = fc.getSelectedFile();
-                frame.setVisible(false);
+                if(returnVal == 0){
+                    frame.setVisible(false);
+                }
             }
         });
         JLabel recentLabel = new JLabel("Recent Files: ",JLabel.CENTER);
