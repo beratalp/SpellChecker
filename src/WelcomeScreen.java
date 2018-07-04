@@ -22,10 +22,7 @@ public class WelcomeScreen extends SpellChecker {
         }
         JFrame frame = new JFrame();
         frame.setSize(600, 500);
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
-        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
-        frame.setLocation(x, y);
+        frame.setLocationRelativeTo(null);
         frame.setTitle(APPNAME + " " + VERSION);
         frame.setResizable(false);
         //OK

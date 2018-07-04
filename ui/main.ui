@@ -159,7 +159,15 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>Settings</string>
     </property>
+    <widget class="QMenu" name="menuLanguage">
+     <property name="title">
+      <string>Language</string>
+     </property>
+     <addaction name="actionEnglish"/>
+     <addaction name="actionTurkish"/>
+    </widget>
     <addaction name="actionOnline_Mode"/>
+    <addaction name="menuLanguage"/>
    </widget>
    <widget class="QMenu" name="menuFont">
     <property name="title">
@@ -256,6 +264,16 @@ p, li { white-space: pre-wrap; }
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionEnglish">
+   <property name="text">
+    <string>English</string>
+   </property>
+  </action>
+  <action name="actionTurkish">
+   <property name="text">
+    <string>Turkish</string>
    </property>
   </action>
  </widget>
