@@ -16,8 +16,7 @@ public class WelcomeScreen extends SpellChecker {
         Scanner fileScan = new Scanner(recentsFile);
         while (fileScan.hasNext()) {
             recentsArray.add(fileScan.nextLine());
-        }
-        if(recentsArray.size() == 0){
+        }if(recentsArray.size() == 0){
             recentsArray.add("No recent files");
         }
         JFrame frame = new JFrame();
@@ -25,7 +24,6 @@ public class WelcomeScreen extends SpellChecker {
         frame.setLocationRelativeTo(null);
         frame.setTitle(APPNAME + " " + VERSION);
         frame.setResizable(false);
-        //OK
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         String[] recents = new String[recentsArray.size()];
         for (int i = 0; i < recentsArray.size(); i++) {
@@ -35,6 +33,14 @@ public class WelcomeScreen extends SpellChecker {
         JList<String> recentList = new JList<String>(recents);
         JPanel panel = new JPanel();
         JButton newButton = new JButton("Create a New File");
+        newButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File emptyFile = new File("recents.txt");
+                frame.setVisible(false);
+                TextFrame frame = new TextFrame(emptyFile);
+            }
+        });
         JButton browseButton = new JButton("Browse...");
         JFileChooser fc = new JFileChooser();
         browseButton.addActionListener(new ActionListener() {
