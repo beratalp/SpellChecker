@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class WelcomeScreen extends SpellChecker {
+public class WelcomeScreen {
     public static void main(String[] args) throws IOException, InterruptedException{
         String fileName = "recents.txt";
         File recentsFile = new File(fileName);
@@ -22,7 +22,7 @@ public class WelcomeScreen extends SpellChecker {
         JFrame frame = new JFrame();
         frame.setSize(600, 500);
         frame.setLocationRelativeTo(null);
-        frame.setTitle(APPNAME + " " + VERSION);
+        frame.setTitle(SpellChecker.APPNAME + " " + SpellChecker.VERSION);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         String[] recents = new String[recentsArray.size()];

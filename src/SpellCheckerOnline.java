@@ -14,4 +14,14 @@ public class SpellCheckerOnline extends SpellChecker {
         boolean reachable = (returnVal==0);
         return reachable;
     }
+
+    @Override
+    public int[] grammarCheck(String str, Language lang) {
+        return new int[0];
+    }
+
+    @Override
+    public int[] spellCheck(String str, Language lang) {
+        return new int[0];
+    }
 }

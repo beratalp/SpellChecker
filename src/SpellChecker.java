@@ -3,8 +3,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public abstract class SpellChecker {
-    final static String VERSION = "0.1";
-    final static String APPNAME = "Spell Inspector";
+    public final static String VERSION = "0.1";
+    public final static String APPNAME = "Spell Inspector";
 
     public enum Language{
         TURKISH,
