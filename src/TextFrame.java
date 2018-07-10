@@ -13,9 +13,32 @@ public class TextFrame extends JFrame {
     JMenu helpMenu = new JMenu("Help");
     JMenu textMenu = new JMenu("Text");
     JMenu backgroundMenu = new JMenu("Background");
-    JMenu colorMenu = new JMenu("Color");
+    JMenu backgroundColorMenu = new JMenu("Color");
+    JMenu textColorMenu = new JMenu("Color");
     JMenuItem sizeItem = new JMenuItem("Size");
     JMenuItem typefaceItem = new JMenuItem("Typeface");
+    JMenuItem blackBackground = new JMenuItem("Black");
+    JMenuItem redBackground = new JMenuItem("Red");
+    JMenuItem greyBackground = new JMenuItem("Grey");
+    JMenuItem blueBackground = new JMenuItem("Blue");
+    JMenuItem darkBlueBackground = new JMenuItem("Dark Blue");
+    JMenuItem whiteBackground = new JMenuItem("White");
+    JMenuItem orangeBackground = new JMenuItem("Orange");
+    JMenuItem greenBackground = new JMenuItem("Green");
+    JMenuItem purpleBackground = new JMenuItem("Purple");
+    JMenuItem pinkBackground = new JMenuItem("Pink");
+    JMenuItem blackText = new JMenuItem("Black");
+    JMenuItem redText = new JMenuItem("Red");
+    JMenuItem greyText = new JMenuItem("Grey");
+    JMenuItem blueText = new JMenuItem("Blue");
+    JMenuItem darkBlueText = new JMenuItem("Dark Blue");
+    JMenuItem whiteText = new JMenuItem("White");
+    JMenuItem orangeText = new JMenuItem("Orange");
+    JMenuItem greenText= new JMenuItem("Green");
+    JMenuItem purpleText = new JMenuItem("Purple");
+    JMenuItem pinkText = new JMenuItem("Pink");
+
+
     JPanel panel = new JPanel();
     JPanel panelCenter = new JPanel();
     JButton buttonSave = new JButton("Save");
@@ -50,7 +73,7 @@ public class TextFrame extends JFrame {
         panel.add(buttonSave);
         panel.add(buttonSpellCheck);
         panel.add(buttonAutoCorrect);
-        panel.add(buttonDecreaseSize);
+        panel.add(buttonIncreaseSize);
         panel.add(buttonDecreaseSize);
     }
 
@@ -61,11 +84,35 @@ public class TextFrame extends JFrame {
         menuBar.add(helpMenu);
         editMenu.add(textMenu);
         editMenu.add(backgroundMenu);
-        textMenu.add(colorMenu);
+        textMenu.add(textColorMenu);
+        backgroundMenu.add(backgroundColorMenu);
     }
     public void addComponentsMenuItems(){
         textMenu.add(sizeItem);
         textMenu.add(typefaceItem);
+        backgroundColorMenu.add(blackBackground);
+        backgroundColorMenu.add(redBackground);
+        backgroundColorMenu.add(greyBackground);
+        backgroundColorMenu.add(blueBackground);
+        backgroundColorMenu.add(darkBlueBackground);
+        backgroundColorMenu.add(whiteBackground);
+        backgroundColorMenu.add(orangeBackground);
+        backgroundColorMenu.add(greenBackground);
+        backgroundColorMenu.add(purpleBackground);
+        backgroundColorMenu.add(pinkBackground);
+        textColorMenu.add(blackText);
+        textColorMenu.add(redText);
+        textColorMenu.add(greyText);
+        textColorMenu.add(blueText);
+        textColorMenu.add(darkBlueText);
+        textColorMenu.add(whiteText);
+        textColorMenu.add(orangeText);
+        textColorMenu.add(greenText);
+        textColorMenu.add(purpleText);
+        textColorMenu.add(pinkText);
+
+
+
     }
 
     public String readFile(File file) throws FileNotFoundException{
