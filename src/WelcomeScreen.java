@@ -35,10 +35,15 @@ public class WelcomeScreen {
         JButton newButton = new JButton("Create a New File");
         newButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e){
                 File emptyFile = new File("recents.txt");
                 frame.setVisible(false);
-                TextFrame frame = new TextFrame(emptyFile);
+                try{
+                    TextFrame frame = new TextFrame(emptyFile);
+                }
+                catch (IOException io){
+                }
+
             }
         });
         JButton browseButton = new JButton("Browse...");

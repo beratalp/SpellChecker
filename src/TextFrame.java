@@ -12,7 +12,6 @@ public class TextFrame extends JFrame {
     JMenu settingsMenu = new JMenu("Settings");
     JMenu helpMenu = new JMenu("Help");
     JPanel panel = new JPanel();
-    GroupLayout layout = new GroupLayout(panel);
     JPanel panelCenter = new JPanel();
     JButton buttonSave = new JButton("Save");
     JButton buttonOpenFile = new JButton("Open");
@@ -23,9 +22,10 @@ public class TextFrame extends JFrame {
     JButton buttonDecreaseSize = new JButton("Decrease Size");
 
 
-    public TextFrame(File file){
+    public TextFrame(File file) throws FileNotFoundException{
         panelCenter.setLayout(new BorderLayout());
         panelCenter.add(textArea, BorderLayout.CENTER);
+        initializeTextField(readFile(file));
         setJMenuBar(menuBar);
         addComponentsButtons();
         addComponentsMenu();
@@ -56,6 +56,20 @@ public class TextFrame extends JFrame {
     }
     public void addComponentsMenuItems(){
 
+    }
+
+    public String readFile(File file) throws FileNotFoundException{
+        String returnString = "";
+        Scanner fileScanner = new Scanner(file);
+        while(fileScanner.hasNext()){
+            returnString += fileScanner.nextLine();
+            returnString += "\n";
+        }
+        return returnString;
+    }
+
+    public void initializeTextField(String fileStr){
+        textArea.setText(fileStr);
     }
 
 
