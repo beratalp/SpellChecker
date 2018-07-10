@@ -11,6 +11,11 @@ public class TextFrame extends JFrame {
     JMenu editMenu = new JMenu("Edit");
     JMenu settingsMenu = new JMenu("Settings");
     JMenu helpMenu = new JMenu("Help");
+    JMenu textMenu = new JMenu("Text");
+    JMenu backgroundMenu = new JMenu("Background");
+    JMenu colorMenu = new JMenu("Color");
+    JMenuItem sizeItem = new JMenuItem("Size");
+    JMenuItem typefaceItem = new JMenuItem("Typeface");
     JPanel panel = new JPanel();
     JPanel panelCenter = new JPanel();
     JButton buttonSave = new JButton("Save");
@@ -29,6 +34,7 @@ public class TextFrame extends JFrame {
         setJMenuBar(menuBar);
         addComponentsButtons();
         addComponentsMenu();
+        addComponentsMenuItems();
         add(panel, BorderLayout.NORTH);
         add(panelCenter);
         setSize(950,800);
@@ -53,9 +59,13 @@ public class TextFrame extends JFrame {
         menuBar.add(editMenu);
         menuBar.add(settingsMenu);
         menuBar.add(helpMenu);
+        editMenu.add(textMenu);
+        editMenu.add(backgroundMenu);
+        textMenu.add(colorMenu);
     }
     public void addComponentsMenuItems(){
-
+        textMenu.add(sizeItem);
+        textMenu.add(typefaceItem);
     }
 
     public String readFile(File file) throws FileNotFoundException{
@@ -71,6 +81,7 @@ public class TextFrame extends JFrame {
     public void initializeTextField(String fileStr){
         textArea.setText(fileStr);
     }
+
 
 
 
