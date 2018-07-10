@@ -12,9 +12,9 @@ public abstract class SpellChecker {
         ENGLISH
     }
 
-    public abstract ArrayList<Inspected> spellCheck(String str, Language lang);
+    public abstract ArrayList<Word> spellCheck(String str, Language lang);
 
-    public abstract ArrayList<Inspected> grammarCheck(String str, Language lang);
+    public abstract ArrayList<Word> grammarCheck(String str, Language lang);
 
-    public abstract ArrayList<Inspected> findSynonyms(String str, Language lang);
+    public abstract ArrayList<Word> findSynonyms(String str, Language lang);
 }

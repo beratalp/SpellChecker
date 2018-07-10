@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-public class Inspected {
+public class Word {
     private int index;
     private ArrayList<String> suggestions;
 
-    public Inspected(){
+    public Word(){
         super();
     }
 
