@@ -1,6 +1,4 @@
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+
 import java.util.ArrayList;
 
 public abstract class SpellChecker {
@@ -12,9 +10,14 @@ public abstract class SpellChecker {
         ENGLISH
     }
 
-    public abstract ArrayList<Word> spellCheck(String str, Language lang);
+    public abstract ArrayList<Word> spellCheck(String str, Language lang) throws Exception;
 
-    public abstract ArrayList<Word> grammarCheck(String str, Language lang);
+    public abstract ArrayList<Word> grammarCheck(String str, Language lang) throws Exception;
 
-    public abstract ArrayList<Word> findSynonyms(String str, Language lang);
+    public abstract ArrayList<Word> findSynonyms(String str, Language lang) throws Exception;
+
+    public static void Error(){
+        System.out.println("Error!");
+        System.exit(0);
+    }
 }

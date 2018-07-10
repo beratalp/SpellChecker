@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 import java.io.*;
 
@@ -72,6 +74,7 @@ public class TextFrame extends JFrame {
         panel.add(buttonOpenFile);
         panel.add(buttonSave);
         panel.add(buttonSpellCheck);
+        buttonSpellCheck.addActionListener(new buttonAction());
         panel.add(buttonAutoCorrect);
         panel.add(buttonIncreaseSize);
         panel.add(buttonDecreaseSize);
@@ -111,8 +114,6 @@ public class TextFrame extends JFrame {
         textColorMenu.add(purpleText);
         textColorMenu.add(pinkText);
 
-
-
     }
 
     public String readFile(File file) throws FileNotFoundException{
@@ -129,10 +130,20 @@ public class TextFrame extends JFrame {
         textArea.setText(fileStr);
     }
 
-
-
-
-
-
+    class buttonAction implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource().equals(buttonSpellCheck)){
+                SpellCheckerOnline spellChecker = new SpellCheckerOnline();
+                try {
+                    spellChecker.spellCheck(textArea.getText(), SpellChecker.Language.ENGLISH);
+                }
+                catch (Exception exception){
+                    System.out.println(exception);
+                    spellChecker.Error();
+                }
+            }
+        }
+    }
 
 }
