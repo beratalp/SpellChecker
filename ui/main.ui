@@ -116,8 +116,8 @@
      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:7.5pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Hello, my name is Spell Inspector. I will underline &lt;/span&gt;&lt;span style=&quot; font-size:11pt; text-decoration: underline;&quot;&gt;wong&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; spelled words for you. Also, &lt;/span&gt;&lt;span style=&quot; font-size:11pt; text-decoration: underline;&quot;&gt;I going&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; to underline your grammar mistakes.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';&quot;&gt;Hello, my name is Spell Inspector. I will underline &lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; text-decoration: underline;&quot;&gt;wong&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';&quot;&gt; spelled words for you. Also, &lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; text-decoration: underline;&quot;&gt;I going&lt;/span&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2';&quot;&gt; to underline your grammar mistakes.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -140,7 +140,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>26</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHgdfr">
@@ -177,15 +177,45 @@ p, li { white-space: pre-wrap; }
      <property name="title">
       <string>Text</string>
      </property>
+     <widget class="QMenu" name="menuColor">
+      <property name="title">
+       <string>Color</string>
+      </property>
+      <addaction name="actionBlack"/>
+      <addaction name="actionRed"/>
+      <addaction name="actionGrey"/>
+      <addaction name="actionBlue"/>
+      <addaction name="actionDark_Blue"/>
+      <addaction name="actionWhite"/>
+      <addaction name="actionOrange"/>
+      <addaction name="actionGreen"/>
+      <addaction name="actionPurple"/>
+      <addaction name="actionPink"/>
+     </widget>
      <addaction name="actionSize"/>
-     <addaction name="actionColor"/>
+     <addaction name="menuColor"/>
      <addaction name="actionFon"/>
     </widget>
     <widget class="QMenu" name="menuBackground">
      <property name="title">
       <string>Background</string>
      </property>
-     <addaction name="actionColor_2"/>
+     <widget class="QMenu" name="menuColor_2">
+      <property name="title">
+       <string>Color</string>
+      </property>
+      <addaction name="actionWhite_2"/>
+      <addaction name="actionBlack_2"/>
+      <addaction name="actionRed_2"/>
+      <addaction name="actionG"/>
+      <addaction name="actionBlue_2"/>
+      <addaction name="actionDark_Blue_2"/>
+      <addaction name="actionOrange_2"/>
+      <addaction name="actionGreen_2"/>
+      <addaction name="actionPurple_2"/>
+      <addaction name="actionPink_2"/>
+     </widget>
+     <addaction name="menuColor_2"/>
     </widget>
     <addaction name="menuFont_2"/>
     <addaction name="menuBackground"/>
@@ -194,12 +224,27 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="actionHelp_Forums"/>
+    <addaction name="separator"/>
     <addaction name="actionAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuRight_Click_Menu">
+    <property name="title">
+     <string>Right Click Menu</string>
+    </property>
+    <addaction name="actionCopy_2"/>
+    <addaction name="actionCut_2"/>
+    <addaction name="actionPaste_2"/>
+    <addaction name="separator"/>
+    <addaction name="actionSuggestions_2"/>
+    <addaction name="actionWrong_2"/>
+    <addaction name="actionBong_2"/>
    </widget>
    <addaction name="menuHgdfr"/>
    <addaction name="menuFont"/>
    <addaction name="menuOptiojs"/>
    <addaction name="menuHelp"/>
+   <addaction name="menuRight_Click_Menu"/>
   </widget>
   <action name="actionHhu">
    <property name="text">
@@ -246,24 +291,192 @@ p, li { white-space: pre-wrap; }
     <string>Size</string>
    </property>
   </action>
-  <action name="actionColor">
-   <property name="text">
-    <string>Color</string>
-   </property>
-  </action>
   <action name="actionFon">
    <property name="text">
     <string>Typeface</string>
    </property>
   </action>
-  <action name="actionColor_2">
-   <property name="text">
-    <string>Color</string>
-   </property>
-  </action>
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionEnglish">
+   <property name="text">
+    <string>English</string>
+   </property>
+  </action>
+  <action name="actionTurkish">
+   <property name="text">
+    <string>Turkish</string>
+   </property>
+  </action>
+  <action name="actionHelp_Forums">
+   <property name="text">
+    <string>Forums</string>
+   </property>
+  </action>
+  <action name="actionCopy">
+   <property name="text">
+    <string>Copy</string>
+   </property>
+  </action>
+  <action name="actionCut">
+   <property name="text">
+    <string>Cut</string>
+   </property>
+  </action>
+  <action name="actionPaste">
+   <property name="text">
+    <string>Paste</string>
+   </property>
+  </action>
+  <action name="actionWrong">
+   <property name="text">
+    <string>wrong</string>
+   </property>
+  </action>
+  <action name="actionBong">
+   <property name="text">
+    <string>bong</string>
+   </property>
+  </action>
+  <action name="actionSuggestions">
+   <property name="text">
+    <string>Suggestions</string>
+   </property>
+  </action>
+  <action name="actionBlack">
+   <property name="text">
+    <string>Black</string>
+   </property>
+  </action>
+  <action name="actionRed">
+   <property name="text">
+    <string>Red</string>
+   </property>
+  </action>
+  <action name="actionGrey">
+   <property name="text">
+    <string>Grey</string>
+   </property>
+  </action>
+  <action name="actionBlue">
+   <property name="text">
+    <string>Blue</string>
+   </property>
+  </action>
+  <action name="actionDark_Blue">
+   <property name="text">
+    <string>Dark Blue</string>
+   </property>
+  </action>
+  <action name="actionWhite">
+   <property name="text">
+    <string>White</string>
+   </property>
+  </action>
+  <action name="actionOrange">
+   <property name="text">
+    <string>Orange</string>
+   </property>
+  </action>
+  <action name="actionGreen">
+   <property name="text">
+    <string>Green</string>
+   </property>
+  </action>
+  <action name="actionPurple">
+   <property name="text">
+    <string>Purple</string>
+   </property>
+  </action>
+  <action name="actionPink">
+   <property name="text">
+    <string>Pink</string>
+   </property>
+  </action>
+  <action name="actionWhite_2">
+   <property name="text">
+    <string>White</string>
+   </property>
+  </action>
+  <action name="actionBlack_2">
+   <property name="text">
+    <string>Black</string>
+   </property>
+  </action>
+  <action name="actionRed_2">
+   <property name="text">
+    <string>Red</string>
+   </property>
+  </action>
+  <action name="actionG">
+   <property name="text">
+    <string>Gray</string>
+   </property>
+  </action>
+  <action name="actionBlue_2">
+   <property name="text">
+    <string>Blue</string>
+   </property>
+  </action>
+  <action name="actionDark_Blue_2">
+   <property name="text">
+    <string>Dark Blue</string>
+   </property>
+  </action>
+  <action name="actionOrange_2">
+   <property name="text">
+    <string>Orange</string>
+   </property>
+  </action>
+  <action name="actionGreen_2">
+   <property name="text">
+    <string>Green</string>
+   </property>
+  </action>
+  <action name="actionPurple_2">
+   <property name="text">
+    <string>Purple</string>
+   </property>
+  </action>
+  <action name="actionPink_2">
+   <property name="text">
+    <string>Pink</string>
+   </property>
+  </action>
+  <action name="actionCopy_2">
+   <property name="text">
+    <string>Copy</string>
+   </property>
+  </action>
+  <action name="actionCut_2">
+   <property name="text">
+    <string>Cut</string>
+   </property>
+  </action>
+  <action name="actionPaste_2">
+   <property name="text">
+    <string>Paste</string>
+   </property>
+  </action>
+  <action name="actionSuggestions_2">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Synonyms</string>
+   </property>
+  </action>
+  <action name="actionWrong_2">
+   <property name="text">
+    <string>underscore</string>
+   </property>
+  </action>
+  <action name="actionBong_2">
+   <property name="text">
+    <string>emphasise</string>
    </property>
   </action>
   <action name="actionEnglish">

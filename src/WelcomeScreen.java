@@ -22,7 +22,7 @@ public class WelcomeScreen {
         JFrame frame = new JFrame();
         frame.setSize(600, 500);
         frame.setLocationRelativeTo(null);
-        frame.setTitle(SpellChecker.APPNAME + " " + SpellChecker.VERSION);
+        frame.setTitle(SpellChecker.APP_NAME + " " + SpellChecker.VERSION);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         String[] recents = new String[recentsArray.size()];

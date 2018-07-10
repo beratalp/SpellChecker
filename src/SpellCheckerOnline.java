@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 
 public class SpellCheckerOnline extends SpellChecker {
     public static boolean isConnectionWorks() throws InterruptedException, IOException {
@@ -16,12 +17,17 @@ public class SpellCheckerOnline extends SpellChecker {
     }
 
     @Override
-    public int[] grammarCheck(String str, Language lang) {
-        return new int[0];
+    public ArrayList<Inspected> grammarCheck(String str, Language lang) {
+        return null;
     }
 
     @Override
-    public int[] spellCheck(String str, Language lang) {
-        return new int[0];
+    public ArrayList<Inspected> spellCheck(String str, Language lang) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Inspected> findSynonyms(String str, Language lang) {
+        return null;
     }
 }
