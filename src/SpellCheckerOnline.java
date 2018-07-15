@@ -6,9 +6,9 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class SpellCheckerOnline extends SpellChecker {
 
-    private File keyfile = new File("keys.txt");
+    private final File KEYFILE = new File("key.txt");
     private String keyString;
-    private Scanner keyScanner;
+    private Key key;
     private final String HOST = "https://api.cognitive.microsoft.com";
     private final String PATH = "/bing/v7.0/spellcheck";
     private String language;
@@ -69,8 +69,8 @@ public class SpellCheckerOnline extends SpellChecker {
     }
 
     public void initializeKey() throws IOException{
-        keyScanner = new Scanner(keyfile);
-        keyString = keyScanner.nextLine();
+        key = new Key(KEYFILE);
+        keyString = key.getKeyString();
     }
 
     private String setLanguage(Language lang){

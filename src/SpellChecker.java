@@ -16,8 +16,15 @@ public abstract class SpellChecker {
 
     public abstract ArrayList<Word> findSynonyms(String str, Language lang) throws Exception;
 
-    public static void Error(){
+    public static void Error(Exception e){
         System.out.println("Error!");
+        System.out.println(e);
+        System.exit(0);
+    }
+
+    public static void Error(String s){
+        System.out.println("Error!");
+        System.out.println(s);
         System.exit(0);
     }
 }
