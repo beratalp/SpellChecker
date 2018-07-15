@@ -1,3 +1,4 @@
+import javax.management.remote.JMXServiceURL;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,6 +18,7 @@ public class TextFrame extends JFrame {
     JMenu backgroundMenu = new JMenu("Background");
     JMenu backgroundColorMenu = new JMenu("Color");
     JMenu textColorMenu = new JMenu("Color");
+    JMenu languageMenu = new JMenu("Language");
     JMenuItem sizeItem = new JMenuItem("Size");
     JMenuItem typefaceItem = new JMenuItem("Typeface");
     JMenuItem blackBackground = new JMenuItem("Black");
@@ -39,6 +41,17 @@ public class TextFrame extends JFrame {
     JMenuItem greenText= new JMenuItem("Green");
     JMenuItem purpleText = new JMenuItem("Purple");
     JMenuItem pinkText = new JMenuItem("Pink");
+    JMenuItem english = new JMenuItem("English");
+    JMenuItem turkish = new JMenuItem("Turkish");
+    JMenuItem onlineMode = new JMenuItem("Online Mode");
+    JMenuItem newFile = new JMenuItem("New");
+    JMenuItem openFile = new JMenuItem("Open");
+    JMenuItem saveFile = new JMenuItem("Save");
+    JMenuItem saveAsFile = new JMenuItem("Save As");
+    JMenuItem quit = new JMenuItem("Quit");
+    JMenuItem about = new JMenuItem( "About" );
+    JMenuItem forum = new JMenuItem("Forum");
+
 
 
     JPanel panel = new JPanel();
@@ -113,6 +126,20 @@ public class TextFrame extends JFrame {
         textColorMenu.add(greenText);
         textColorMenu.add(purpleText);
         textColorMenu.add(pinkText);
+        fileMenu.add(newFile);
+        fileMenu.add(openFile);
+        fileMenu.add(new JSeparator());
+        fileMenu.add(saveFile);
+        fileMenu.add(saveAsFile);
+        fileMenu.add(new JSeparator());
+        fileMenu.add(quit);
+        settingsMenu.add(onlineMode);
+        settingsMenu.add(languageMenu);
+        languageMenu.add(english);
+        languageMenu.add(turkish);
+        helpMenu.add(forum);
+        helpMenu.add(new JSeparator());
+        helpMenu.add(about);
 
     }
 
