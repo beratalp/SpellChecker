@@ -139,8 +139,7 @@ public class TextFrame extends JFrame {
                     spellChecker.spellCheck(textArea.getText(), SpellChecker.Language.ENGLISH);
                 }
                 catch (Exception exception){
-                    System.out.println(exception);
-                    spellChecker.Error();
+                    spellChecker.Error(exception);
                 }
             }
         }
