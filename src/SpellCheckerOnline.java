@@ -6,7 +6,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class SpellCheckerOnline extends SpellChecker {
 
-    private final File KEYFILE = new File("key.txt");
+    private final File KEYFILE = new File("keys.txt");
     private String keyString;
     private Key key;
     private final String HOST = "https://api.cognitive.microsoft.com";
