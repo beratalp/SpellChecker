@@ -43,7 +43,6 @@ public class TextFrame extends JFrame {
     JMenuItem pinkText = new JMenuItem("Pink");
     JMenuItem english = new JMenuItem("English");
     JMenuItem turkish = new JMenuItem("Turkish");
-    JMenuItem onlineMode = new JMenuItem("Online Mode");
     JMenuItem newFile = new JMenuItem("New");
     JMenuItem openFile = new JMenuItem("Open");
     JMenuItem saveFile = new JMenuItem("Save");
@@ -51,6 +50,7 @@ public class TextFrame extends JFrame {
     JMenuItem quit = new JMenuItem("Quit");
     JMenuItem about = new JMenuItem( "About" );
     JMenuItem forum = new JMenuItem("Forum");
+    JCheckBoxMenuItem onlineMode = new JCheckBoxMenuItem("Online Mode");
 
 
 
@@ -140,7 +140,6 @@ public class TextFrame extends JFrame {
         helpMenu.add(forum);
         helpMenu.add(new JSeparator());
         helpMenu.add(about);
-
     }
 
     public String readFile(File file) throws FileNotFoundException{
