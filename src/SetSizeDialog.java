@@ -5,10 +5,11 @@ import java.util.Collections;
 
 public class SetSizeDialog extends JDialog {
 
+
     private JSpinner spinner;
     private JButton applyButton;
     public SetSizeDialog(){
-        setLayout(new BorderLayout());
+        setLayout(new FlowLayout(FlowLayout.CENTER ,100,10));
         applyButton = new JButton("Apply");
         setTitle("Set Size");
         Integer[] size = new Integer[71];
@@ -22,12 +23,11 @@ public class SetSizeDialog extends JDialog {
         Dimension dimension = new Dimension(35,30);
         spinner.setPreferredSize(dimension);
         spinner.setValue(12);
-        add(spinner, BorderLayout.NORTH);
-        add(applyButton, BorderLayout.SOUTH);
-        setSize(200,150);
+        add(spinner);
+        add(applyButton);
+        setSize(300,150);
         setLocationRelativeTo(null);
         setVisible(true);
     }
-
 }
 
