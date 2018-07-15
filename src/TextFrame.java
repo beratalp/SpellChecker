@@ -64,11 +64,14 @@ public class TextFrame extends JFrame {
     JButton buttonIncreaseSize = new JButton("Increase Size");
     JButton buttonDecreaseSize = new JButton("Decrease Size");
 
+    private TextFile file;
 
-    public TextFrame(File file) throws FileNotFoundException{
+
+    public TextFrame(TextFile file) throws IOException{
+        this.file = file;
         panelCenter.setLayout(new BorderLayout());
         panelCenter.add(textArea, BorderLayout.CENTER);
-        initializeTextField(readFile(file));
+        initializeTextField(file);
         setJMenuBar(menuBar);
         addComponentsButtons();
         addComponentsMenu();
@@ -142,18 +145,9 @@ public class TextFrame extends JFrame {
         helpMenu.add(about);
     }
 
-    public String readFile(File file) throws FileNotFoundException{
-        String returnString = "";
-        Scanner fileScanner = new Scanner(file);
-        while(fileScanner.hasNext()){
-            returnString += fileScanner.nextLine();
-            returnString += "\n";
-        }
-        return returnString;
-    }
 
-    public void initializeTextField(String fileStr){
-        textArea.setText(fileStr);
+    public void initializeTextField(TextFile file) throws IOException{
+        textArea.setText(file.getText());
     }
 
     class buttonAction implements ActionListener{

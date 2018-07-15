@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class WelcomeScreen {
+    private static TextFile file;
     public static void main(String[] args) throws IOException, InterruptedException{
         String fileName = "recents.txt";
         File recentsFile = new File(fileName);
@@ -36,12 +37,18 @@ public class WelcomeScreen {
         newButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                File emptyFile = new File("recents.txt");
+                try{
+                    file = new TextFile();
+                }
+                catch (Exception ex){
+                    SpellChecker.Error(ex);
+                }
                 frame.setVisible(false);
                 try{
-                    TextFrame frame = new TextFrame(emptyFile);
+                    TextFrame frame = new TextFrame(file);
                 }
                 catch (IOException io){
+                    System.out.println(io);
                 }
 
             }
