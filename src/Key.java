@@ -16,7 +16,7 @@ public class Key {
 
     public String getKeyString() throws IOException{
         keyScanner = new Scanner(keyFile);
-        keyString = keyScanner.nextLine();
+        keyString = keyScanner.next();
         return keyString;
     }
 }

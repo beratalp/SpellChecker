@@ -1,21 +1,21 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.net.*;
 import javax.net.ssl.HttpsURLConnection;
 
+
 public class SpellCheckerOnline extends SpellChecker {
 
-    private final File KEYFILE = new File("keys.txt");
+    private File keyfile = new File("keys.txt");
     private String keyString;
-    private Key key;
+    Key key;
     private final String HOST = "https://api.cognitive.microsoft.com";
     private final String PATH = "/bing/v7.0/spellcheck";
     private String language;
     private String mode;
     private URL url;
     private HttpsURLConnection connection;
-
+    private ArrayList<Word> wordList;
 
     public static boolean isConnectionWorks() throws InterruptedException, IOException {
         String command;
@@ -38,6 +38,7 @@ public class SpellCheckerOnline extends SpellChecker {
 
     @Override
     public ArrayList<Word> spellCheck(String str, Language lang) throws Exception{
+        wordList = new ArrayList<>();
         mode = "proof";
         language = setLanguage(lang);
         String params = "?mkt=" + language + "&mode=" + mode;
@@ -60,7 +61,7 @@ public class SpellCheckerOnline extends SpellChecker {
             System.out.println(line);
         }
         in.close();
-        return null;
+        return wordList;
     }
 
     @Override
@@ -69,7 +70,7 @@ public class SpellCheckerOnline extends SpellChecker {
     }
 
     public void initializeKey() throws IOException{
-        key = new Key(KEYFILE);
+        key = new Key(keyfile);
         keyString = key.getKeyString();
     }
 
