@@ -76,6 +76,7 @@ public class TextFrame extends JFrame {
         addComponentsButtons();
         addComponentsMenu();
         addComponentsMenuItems();
+        addAclionListeners();
         add(panel, BorderLayout.NORTH);
         add(panelCenter);
         setSize(950,800);
@@ -84,6 +85,18 @@ public class TextFrame extends JFrame {
         setVisible(true);
     }
 
+    public void addAclionListeners(){
+        blackBackground.addActionListener(new menuAction());
+        redBackground.addActionListener(new menuAction());
+        greyBackground.addActionListener(new menuAction());
+        greenBackground.addActionListener(new menuAction());
+        pinkBackground.addActionListener(new menuAction());
+        purpleBackground.addActionListener(new menuAction());
+        whiteBackground.addActionListener(new menuAction());
+        orangeBackground.addActionListener(new menuAction());
+        blueBackground.addActionListener(new menuAction());
+        darkBlueBackground.addActionListener(new menuAction());
+    }
 
     public void addComponentsButtons(){
         panel.add(buttonNewFile);
@@ -165,6 +178,34 @@ public class TextFrame extends JFrame {
                     spellChecker.Error(exception);
                 }
             }
+        }
+    }
+
+    class menuAction implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == blackBackground) {
+                textArea.setBackground(Color.BLACK);
+            } else if (e.getSource() == redBackground) {
+                textArea.setBackground(Color.red);
+            } else if (e.getSource() == greyBackground) {
+                textArea.setBackground(Color.darkGray);
+            } else if (e.getSource() == blueBackground) {
+                textArea.setBackground(Color.blue);
+            } else if (e.getSource() == darkBlueBackground) {
+                textArea.setBackground(Color.decode("#00008"));
+            } else if (e.getSource() == whiteBackground) {
+                textArea.setBackground(Color.white);
+            } else if (e.getSource() == purpleBackground) {
+                textArea.setBackground(Color.decode("#800080"));
+            } else if (e.getSource() == pinkBackground) {
+                textArea.setBackground(Color.pink);
+            }else if (e.getSource() == greenBackground ){
+                textArea.setBackground(Color.green);
+            }else if (e.getSource() == orangeBackground ){
+                textArea.setBackground(Color.orange);
+            }
+
         }
     }
 
