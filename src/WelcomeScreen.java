@@ -3,6 +3,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +18,7 @@ public class WelcomeScreen {
         ArrayList<String> recentsArray = new ArrayList<String>();
         Scanner fileScan = new Scanner(recentsFile);
         while (fileScan.hasNext()) {
-            recentsArray.add(fileScan.nextLine());
+            recentsArray.add(fileScan.next());
         }if(recentsArray.size() == 0){
             recentsArray.add("No recent files");
         }
@@ -32,6 +34,42 @@ public class WelcomeScreen {
         }
         BufferedImage logo = ImageIO.read(new File("logo.png"));
         JList<String> recentList = new JList<String>(recents);
+        recentList.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(e.getClickCount() == 2){
+                    String selectedFile = (String) recentList.getSelectedValue();
+                    System.out.println(selectedFile);
+                    try{
+                        frame.setVisible(false);
+                        TextFrame textFrame = new TextFrame(new TextFile(selectedFile));
+                    }
+                    catch (Exception ex){
+                        frame.setVisible(true);
+                    }
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
         JPanel panel = new JPanel();
         JButton newButton = new JButton("Create a New File");
         newButton.addActionListener(new ActionListener() {
@@ -60,8 +98,17 @@ public class WelcomeScreen {
             public void actionPerformed(ActionEvent e) {
                 int returnVal = fc.showOpenDialog(frame);
                 File browseFile = fc.getSelectedFile();
+                System.out.println(returnVal);
                 if(returnVal == 0){
                     frame.setVisible(false);
+                    System.out.println("heeey");
+                    try{
+                        TextFile file = new TextFile(browseFile.getPath());
+                        TextFrame frame = new TextFrame(file);
+                    }
+                    catch(Exception ex){
+                        SpellChecker.Error(ex);
+                    }
                 }
             }
         });
@@ -70,6 +117,7 @@ public class WelcomeScreen {
         JLabel logoLabel = new JLabel(new ImageIcon(logo));
         JCheckBox onlineBox = new JCheckBox("Online Mode");
         if(!SpellCheckerOnline.isConnectionWorks()){
+            SpellChecker.isOnline = false;
             onlineBox.setEnabled(false);
         }
         onlineBox.setBackground(Color.decode("#455A64"));

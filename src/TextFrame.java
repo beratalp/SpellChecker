@@ -1,4 +1,3 @@
-import javax.management.remote.JMXServiceURL;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -51,6 +50,7 @@ public class TextFrame extends JFrame {
     JMenuItem about = new JMenuItem( "About" );
     JMenuItem forum = new JMenuItem("Forum");
     JCheckBoxMenuItem onlineMode = new JCheckBoxMenuItem("Online Mode");
+    SpellChecker spellChecker;
 
 
 
@@ -154,7 +154,10 @@ public class TextFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource().equals(buttonSpellCheck)){
-                SpellCheckerOnline spellChecker = new SpellCheckerOnline();
+                if(SpellChecker.isOnline)
+                    spellChecker = new SpellCheckerOnline();
+                else
+                    spellChecker = new SpellCheckerOffline();
                 try {
                     spellChecker.spellCheck(textArea.getText(), SpellChecker.Language.ENGLISH);
                 }

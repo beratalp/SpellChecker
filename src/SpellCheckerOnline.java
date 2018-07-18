@@ -38,12 +38,13 @@ public class SpellCheckerOnline extends SpellChecker {
 
     @Override
     public ArrayList<Word> spellCheck(String str, Language lang) throws Exception{
-        wordList = new ArrayList<>();
+        wordList = new ArrayList<Word>();
         mode = "proof";
         language = setLanguage(lang);
         String params = "?mkt=" + language + "&mode=" + mode;
         url = new URL(HOST + PATH + params);
         initializeKey();
+        keyString = "1138a2e6a8be4d5bbda6be0cc872c87f";
         connection = (HttpsURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -72,6 +73,7 @@ public class SpellCheckerOnline extends SpellChecker {
     public void initializeKey() throws IOException{
         key = new Key(keyfile);
         keyString = key.getKeyString();
+        System.out.println(keyString);
     }
 
     private String setLanguage(Language lang){
