@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class WelcomeScreen {
+    private static JCheckBox onlineBox;
     private static TextFile file;
     public static void main(String[] args) throws IOException, InterruptedException{
         String fileName = "recents.txt";
@@ -83,6 +84,12 @@ public class WelcomeScreen {
                 }
                 frame.setVisible(false);
                 try{
+                    if(onlineBox.isSelected()){
+                        SpellChecker.isOnline = true;
+                    }
+                    else{
+                        SpellChecker.isOnline = false;
+                    }
                     TextFrame frame = new TextFrame(file);
                 }
                 catch (IOException io){
@@ -98,10 +105,14 @@ public class WelcomeScreen {
             public void actionPerformed(ActionEvent e) {
                 int returnVal = fc.showOpenDialog(frame);
                 File browseFile = fc.getSelectedFile();
-                System.out.println(returnVal);
                 if(returnVal == 0){
+                    if(onlineBox.isSelected()){
+                        SpellChecker.isOnline = true;
+                    }
+                    else{
+                        SpellChecker.isOnline = false;
+                    }
                     frame.setVisible(false);
-                    System.out.println("heeey");
                     try{
                         TextFile file = new TextFile(browseFile.getPath());
                         TextFrame frame = new TextFrame(file);
@@ -115,14 +126,24 @@ public class WelcomeScreen {
         JLabel recentLabel = new JLabel("Recent Files: ",JLabel.CENTER);
         recentLabel.setForeground(Color.white);
         JLabel logoLabel = new JLabel(new ImageIcon(logo));
-        JCheckBox onlineBox = new JCheckBox("Online Mode");
+        onlineBox = new JCheckBox("Online Mode");
         if(!SpellCheckerOnline.isConnectionWorks()){
             SpellChecker.isOnline = false;
             onlineBox.setEnabled(false);
         }
+        else{
+            SpellChecker.isOnline = true;
+            onlineBox.setSelected(true);
+        }
         onlineBox.setBackground(Color.decode("#455A64"));
         onlineBox.setForeground(Color.white);
         JButton helpButton = new JButton("About & Help");
+        helpButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SpellChecker.Error("Not implemented yet.");
+            }
+        });
         panel.setBackground(Color.decode("#455A64"));
         GroupLayout layout = new GroupLayout(panel);
         panel.setLayout(layout);

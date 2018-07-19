@@ -1,4 +1,5 @@
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public abstract class SpellChecker {
@@ -18,14 +19,12 @@ public abstract class SpellChecker {
     public abstract ArrayList<Word> findSynonyms(String str, Language lang) throws Exception;
 
     public static void Error(Exception e){
-        System.out.println("Error!");
-        System.out.println(e);
+        JOptionPane.showMessageDialog(null, e.toString(), "Error!", JOptionPane.ERROR_MESSAGE);
         System.exit(0);
     }
 
     public static void Error(String s){
-        System.out.println("Error!");
-        System.out.println(s);
+        JOptionPane.showMessageDialog(null, s, "Error!", JOptionPane.ERROR_MESSAGE);
         System.exit(0);
     }
 }

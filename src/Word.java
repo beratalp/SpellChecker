@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Word {
     private int index;
-    private ArrayList<String> suggestions;
+    private ArrayList<String> suggestions = new ArrayList<>();
 
     public Word(){
         super();

@@ -2,6 +2,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.net.*;
 import javax.net.ssl.HttpsURLConnection;
+import org.json.simple.*;
+import org.json.simple.parser.*;
+
 
 
 public class SpellCheckerOnline extends SpellChecker {
@@ -16,6 +19,8 @@ public class SpellCheckerOnline extends SpellChecker {
     private URL url;
     private HttpsURLConnection connection;
     private ArrayList<Word> wordList;
+    private JSONObject json;
+    private JSONArray jsonArray;
 
     public static boolean isConnectionWorks() throws InterruptedException, IOException {
         String command;
@@ -44,7 +49,6 @@ public class SpellCheckerOnline extends SpellChecker {
         String params = "?mkt=" + language + "&mode=" + mode;
         url = new URL(HOST + PATH + params);
         initializeKey();
-        keyString = "1138a2e6a8be4d5bbda6be0cc872c87f";
         connection = (HttpsURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -58,10 +62,22 @@ public class SpellCheckerOnline extends SpellChecker {
 
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         String line;
+        String jsonLine = "";
         while ((line = in.readLine()) != null){
-            System.out.println(line);
+            jsonLine += line;
         }
         in.close();
+        json = (JSONObject) new JSONParser().parse(jsonLine);
+        jsonArray = (JSONArray) (json.get("flaggedTokens"));
+        for(int i = 0; i < jsonArray.size(); i++){
+            Word word = new Word();
+            JSONArray suggestions = (JSONArray) ((JSONObject)jsonArray.get(i)).get("suggestions");
+            word.setIndex(Integer.parseInt((((JSONObject) jsonArray.get(i)).get("offset")).toString()));
+            for(int j = 0; j < suggestions.size(); j++){
+                word.addSuggestion((String) ((JSONObject) suggestions.get(j)).get("suggestion"));
+            }
+            wordList.add(word);
+        }
         return wordList;
     }
 
