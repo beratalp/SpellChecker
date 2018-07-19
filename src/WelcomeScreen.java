@@ -162,6 +162,5 @@ public class WelcomeScreen {
         );
         frame.add(panel);
         frame.setVisible(true);
-
     }
 }
