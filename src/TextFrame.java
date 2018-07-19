@@ -66,11 +66,17 @@ public class TextFrame extends JFrame {
     private TextFile file;
 
 
-    public TextFrame(TextFile file) throws IOException {
+    public TextFrame(TextFile file) throws Exception {
         this.file = file;
         panelCenter.add(textArea);
         initializeTextField(file);
         setJMenuBar(menuBar);
+        if(SpellChecker.isOnline){
+            onlineMode.setState(true);
+        }
+        if(!SpellCheckerOnline.isConnectionWorks()){
+            onlineMode.setEnabled(false);
+        }
         addComponentsButtons();
         addComponentsMenu();
         addComponentsMenuItems();
@@ -98,6 +104,17 @@ public class TextFrame extends JFrame {
         orangeBackground.addActionListener(new menuAction());
         blueBackground.addActionListener(new menuAction());
         darkBlueBackground.addActionListener(new menuAction());
+        redText.addActionListener(new menuAction());
+        blueText.addActionListener(new menuAction());
+        blackText.addActionListener(new menuAction());
+        greyText.addActionListener(new menuAction());
+        whiteText.addActionListener(new menuAction());
+        orangeText.addActionListener(new menuAction());
+        greenText.addActionListener(new menuAction());
+        pinkText.addActionListener(new menuAction());
+        darkBlueText.addActionListener(new menuAction());
+        blueText.addActionListener(new menuAction());
+        purpleText.addActionListener(new menuAction());
     }
 
     public void addComponentsButtons() {
@@ -206,6 +223,26 @@ public class TextFrame extends JFrame {
                 textArea.setBackground(Color.decode("#1B5E20"));
             } else if (e.getSource() == orangeBackground) {
                 textArea.setBackground(Color.decode("#E64A19"));
+            } else if ( e.getSource() == redText ){
+                textArea.setForeground(Color.decode("#E53935"));
+            }else if ( e.getSource() == blackText ){
+                textArea.setForeground(Color.black);
+            }else if ( e.getSource() == greyText ){
+                textArea.setForeground(Color.decode("#9E9E9E"));
+            }else if ( e.getSource() == blueText ){
+                textArea.setForeground(Color.decode("#42A5F5"));
+            }else if ( e.getSource() == darkBlueText ){
+                textArea.setForeground(Color.decode("#283593"));
+            }else if ( e.getSource() == whiteText ){
+                textArea.setForeground(Color.white);
+            }else if ( e.getSource() == purpleText ){
+                textArea.setForeground(Color.decode("#8E24AA"));
+            }else if ( e.getSource() == pinkText ){
+                textArea.setForeground(Color.decode("#F06292"));
+            }else if ( e.getSource() == greenText ){
+                textArea.setForeground(Color.decode("#1B5E20"));
+            }else if ( e.getSource() == orangeText ){
+                textArea.setForeground(Color.decode("#E64A19"));
             }
         }
     }

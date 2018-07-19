@@ -83,17 +83,17 @@ public class WelcomeScreen {
                     SpellChecker.Error(ex);
                 }
                 frame.setVisible(false);
+                if(onlineBox.isSelected()){
+                    SpellChecker.isOnline = true;
+                }
+                else{
+                    SpellChecker.isOnline = false;
+                }
                 try{
-                    if(onlineBox.isSelected()){
-                        SpellChecker.isOnline = true;
-                    }
-                    else{
-                        SpellChecker.isOnline = false;
-                    }
                     TextFrame frame = new TextFrame(file);
                 }
-                catch (IOException io){
-                    System.out.println(io);
+                catch (Exception ex){
+                    SpellChecker.Error(ex);
                 }
 
             }
