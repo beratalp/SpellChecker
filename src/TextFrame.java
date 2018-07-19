@@ -7,7 +7,7 @@ import java.io.*;
 
 public class TextFrame extends JFrame {
 
-    JTextArea textArea = new JTextArea();
+    JEditorPane textArea = new JEditorPane();
     JMenuBar menuBar = new JMenuBar();
     JMenu fileMenu = new JMenu("File");
     JMenu editMenu = new JMenu("Edit");
@@ -83,10 +83,9 @@ public class TextFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         getContentPane().add(scroll);
-        //Ok
     }
 
     public void addActionListeners() {
