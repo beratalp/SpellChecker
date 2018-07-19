@@ -37,7 +37,7 @@ public class TextFrame extends JFrame {
     JMenuItem darkBlueText = new JMenuItem("Dark Blue");
     JMenuItem whiteText = new JMenuItem("White");
     JMenuItem orangeText = new JMenuItem("Orange");
-    JMenuItem greenText= new JMenuItem("Green");
+    JMenuItem greenText = new JMenuItem("Green");
     JMenuItem purpleText = new JMenuItem("Purple");
     JMenuItem pinkText = new JMenuItem("Pink");
     JMenuItem english = new JMenuItem("English");
@@ -47,11 +47,11 @@ public class TextFrame extends JFrame {
     JMenuItem saveFile = new JMenuItem("Save");
     JMenuItem saveAsFile = new JMenuItem("Save As");
     JMenuItem quit = new JMenuItem("Quit");
-    JMenuItem about = new JMenuItem( "About" );
+    JMenuItem about = new JMenuItem("About");
     JMenuItem forum = new JMenuItem("Forum");
     JCheckBoxMenuItem onlineMode = new JCheckBoxMenuItem("Online Mode");
     SpellChecker spellChecker;
-
+    JScrollPane scroll = new JScrollPane(textArea);;
 
 
     JPanel panel = new JPanel();
@@ -67,7 +67,7 @@ public class TextFrame extends JFrame {
     private TextFile file;
 
 
-    public TextFrame(TextFile file) throws IOException{
+    public TextFrame(TextFile file) throws IOException {
         this.file = file;
         panelCenter.setLayout(new BorderLayout());
         panelCenter.add(textArea, BorderLayout.CENTER);
@@ -76,16 +76,19 @@ public class TextFrame extends JFrame {
         addComponentsButtons();
         addComponentsMenu();
         addComponentsMenuItems();
-        addAclionListeners();
+        addActionListeners();
         add(panel, BorderLayout.NORTH);
         add(panelCenter);
-        setSize(950,800);
+        setSize(950, 800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        getContentPane().add(scroll);
     }
 
-    public void addAclionListeners(){
+    public void addActionListeners() {
         blackBackground.addActionListener(new menuAction());
         redBackground.addActionListener(new menuAction());
         greyBackground.addActionListener(new menuAction());
@@ -98,7 +101,7 @@ public class TextFrame extends JFrame {
         darkBlueBackground.addActionListener(new menuAction());
     }
 
-    public void addComponentsButtons(){
+    public void addComponentsButtons() {
         panel.add(buttonNewFile);
         panel.add(buttonOpenFile);
         panel.add(buttonSave);
@@ -109,7 +112,7 @@ public class TextFrame extends JFrame {
         panel.add(buttonDecreaseSize);
     }
 
-    public void addComponentsMenu(){
+    public void addComponentsMenu() {
         menuBar.add(fileMenu);
         menuBar.add(editMenu);
         menuBar.add(settingsMenu);
@@ -119,7 +122,8 @@ public class TextFrame extends JFrame {
         textMenu.add(textColorMenu);
         backgroundMenu.add(backgroundColorMenu);
     }
-    public void addComponentsMenuItems(){
+
+    public void addComponentsMenuItems() {
         textMenu.add(sizeItem);
         textMenu.add(typefaceItem);
         backgroundColorMenu.add(blackBackground);
@@ -159,54 +163,52 @@ public class TextFrame extends JFrame {
     }
 
 
-    public void initializeTextField(TextFile file) throws IOException{
+    public void initializeTextField(TextFile file) throws IOException {
         textArea.setText(file.getText());
     }
 
-    class buttonAction implements ActionListener{
+    class buttonAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getSource().equals(buttonSpellCheck)){
-                if(SpellChecker.isOnline)
+            if (e.getSource().equals(buttonSpellCheck)) {
+                if (SpellChecker.isOnline)
                     spellChecker = new SpellCheckerOnline();
                 else
                     spellChecker = new SpellCheckerOffline();
                 try {
                     spellChecker.spellCheck(textArea.getText(), SpellChecker.Language.ENGLISH);
-                }
-                catch (Exception exception){
+                } catch (Exception exception) {
                     spellChecker.Error(exception);
                 }
             }
         }
     }
 
-    class menuAction implements ActionListener{
+    class menuAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == blackBackground) {
-                textArea.setBackground(Color.BLACK);
+                textArea.setBackground(Color.decode("#424242"));
             } else if (e.getSource() == redBackground) {
-                textArea.setBackground(Color.red);
+                textArea.setBackground(Color.decode("#E53935"));
             } else if (e.getSource() == greyBackground) {
-                textArea.setBackground(Color.darkGray);
+                textArea.setBackground(Color.decode("#9E9E9E"));
             } else if (e.getSource() == blueBackground) {
-                textArea.setBackground(Color.blue);
+                textArea.setBackground(Color.decode("#42A5F5"));
             } else if (e.getSource() == darkBlueBackground) {
-                textArea.setBackground(Color.decode("#00008"));
+                textArea.setBackground(Color.decode("#283593"));
             } else if (e.getSource() == whiteBackground) {
                 textArea.setBackground(Color.white);
             } else if (e.getSource() == purpleBackground) {
-                textArea.setBackground(Color.decode("#800080"));
+                textArea.setBackground(Color.decode("#8E24AA"));
             } else if (e.getSource() == pinkBackground) {
-                textArea.setBackground(Color.pink);
-            }else if (e.getSource() == greenBackground ){
-                textArea.setBackground(Color.green);
-            }else if (e.getSource() == orangeBackground ){
-                textArea.setBackground(Color.orange);
+                textArea.setBackground(Color.decode("#F06292"));
+            } else if (e.getSource() == greenBackground) {
+                textArea.setBackground(Color.decode("#1B5E20"));
+            } else if (e.getSource() == orangeBackground) {
+                textArea.setBackground(Color.decode("#E64A19"));
             }
-
         }
     }
-
 }
+
