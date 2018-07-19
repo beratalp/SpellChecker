@@ -7,7 +7,7 @@ import java.io.*;
 
 public class TextFrame extends JFrame {
 
-    JEditorPane textArea = new JEditorPane();
+    JTextPane textArea = new JTextPane();
     JMenuBar menuBar = new JMenuBar();
     JMenu fileMenu = new JMenu("File");
     JMenu editMenu = new JMenu("Edit");
@@ -51,7 +51,6 @@ public class TextFrame extends JFrame {
     JMenuItem forum = new JMenuItem("Forum");
     JCheckBoxMenuItem onlineMode = new JCheckBoxMenuItem("Online Mode");
     SpellChecker spellChecker;
-    JScrollPane scroll = new JScrollPane(textArea);;
 
 
     JPanel panel = new JPanel();
@@ -69,8 +68,7 @@ public class TextFrame extends JFrame {
 
     public TextFrame(TextFile file) throws IOException {
         this.file = file;
-        panelCenter.setLayout(new BorderLayout());
-        panelCenter.add(textArea, BorderLayout.CENTER);
+        panelCenter.add(textArea);
         initializeTextField(file);
         setJMenuBar(menuBar);
         addComponentsButtons();
@@ -78,14 +76,15 @@ public class TextFrame extends JFrame {
         addComponentsMenuItems();
         addActionListeners();
         add(panel, BorderLayout.NORTH);
-        add(panelCenter);
+        add(panelCenter,BorderLayout.CENTER);
         setSize(950, 800);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        getContentPane().add(scrollPane);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        getContentPane().add(scroll);
+
     }
 
     public void addActionListeners() {
