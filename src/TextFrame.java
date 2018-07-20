@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 import java.io.*;
+import javax.imageio.ImageIO;
 
 public class TextFrame extends JFrame {
 
@@ -55,8 +56,8 @@ public class TextFrame extends JFrame {
 
     JPanel panel = new JPanel();
     JPanel panelCenter = new JPanel();
-    JButton buttonSave = new JButton("Save");
-    JButton buttonOpenFile = new JButton("Open");
+    JButton buttonSave = new JButton();
+    JButton buttonOpenFile = new JButton();
     JButton buttonNewFile = new JButton("New");
     JButton buttonSpellCheck = new JButton("SpellChecker");
     JButton buttonAutoCorrect = new JButton("AutoCorrect");
@@ -64,6 +65,7 @@ public class TextFrame extends JFrame {
     JButton buttonDecreaseSize = new JButton("Decrease Size");
 
     private TextFile file;
+    private ArrayList<Word> words;
 
 
     public TextFrame(TextFile file) throws Exception {
@@ -83,6 +85,8 @@ public class TextFrame extends JFrame {
         addActionListeners();
         add(panel, BorderLayout.NORTH);
         add(panelCenter,BorderLayout.CENTER);
+        panel.setBackground(Color.decode("#455A64"));
+        panelCenter.setBackground(Color.decode("#455A64"));
         setSize(950, 800);
         JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -119,7 +123,21 @@ public class TextFrame extends JFrame {
 
     public void addComponentsButtons() {
         panel.add(buttonNewFile);
+        try{
+            Image img = ImageIO.read(getClass().getResource("open.png"));
+            buttonOpenFile.setIcon(new ImageIcon(img));
+        }
+        catch (Exception ex){
+            SpellChecker.Error(ex);
+        }
         panel.add(buttonOpenFile);
+        try{
+            Image img = ImageIO.read(getClass().getResource("save.png"));
+            buttonSave.setIcon(new ImageIcon(img));
+        }
+        catch (Exception ex){
+            SpellChecker.Error(ex);
+        }
         panel.add(buttonSave);
         panel.add(buttonSpellCheck);
         buttonSpellCheck.addActionListener(new buttonAction());
@@ -192,7 +210,16 @@ public class TextFrame extends JFrame {
                 else
                     spellChecker = new SpellCheckerOffline();
                 try {
-                    spellChecker.spellCheck(textArea.getText(), SpellChecker.Language.ENGLISH);
+                    words = spellChecker.spellCheck(textArea.getText(), SpellChecker.Language.ENGLISH);
+                    char[] textChars = textArea.getText().toCharArray();
+                    int wordIndex = 0;
+                    for(Word word: words){
+                        for(int i = word.getIndex(); i < word.getSuggestions().get(0).length(); i ++){
+                            textChars[i] = word.getSuggestions().get(0).charAt(wordIndex);
+                            wordIndex ++;
+                        }
+                    }
+                    textArea.setText(String.valueOf(textChars));
                 } catch (Exception exception) {
                     spellChecker.Error(exception);
                 }
