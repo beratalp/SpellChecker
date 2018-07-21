@@ -72,10 +72,14 @@ public class TextFrame extends JFrame {
     private TextFile file;
     private ArrayList<Word> words;
 
+    private static float textSize = 12;
+    private static Font textFont;
+
 
     public TextFrame(TextFile file) throws Exception {
         this.file = file;
         panelCenter.add(textArea);
+
         initializeTextField(file);
         setJMenuBar(menuBar);
         if(SpellChecker.isOnline){
@@ -123,9 +127,13 @@ public class TextFrame extends JFrame {
         darkBlueText.addActionListener(new menuAction());
         blueText.addActionListener(new menuAction());
         purpleText.addActionListener(new menuAction());
+        sizeItem.addActionListener(new menuAction());
+
         textArea.addMouseListener(new RightMenuAction());
+
         buttonOpenFile.addActionListener(new buttonAction());
         buttonNewFile.addActionListener(new buttonAction());
+
     }
 
     public void addComponentsButtons() {
@@ -344,6 +352,9 @@ public class TextFrame extends JFrame {
             }else if ( e.getSource() == orangeText ){
                 textArea.setForeground(Color.decode("#E64A19"));
             }
+            else if( e.getSource() == sizeItem){
+                SetSizeDialog dialog = new SetSizeDialog();
+            }
         }
     }
     class RightMenuAction implements MouseListener{
@@ -388,6 +399,18 @@ public class TextFrame extends JFrame {
         }
         catch (BadLocationException ex){
         }
+    }
+
+    public static void setTextFont(Font font){
+
+    }
+
+    public static void setTextSize(int size){
+        textSize = size;
+        textArea.setFont(textArea.getFont().deriveFont(textSize));
+    }
+    public static String getTextSize(){
+        return ((int) textSize) + "";
     }
 }
 
