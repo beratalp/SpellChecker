@@ -11,6 +11,10 @@ import java.io.IOException;
 import java.util.*;
 
 public class WelcomeScreen {
+
+    public WelcomeScreen() throws Exception{
+        main(null);
+    }
     private static JCheckBox onlineBox;
     private static TextFile file;
     public static void main(String[] args) throws IOException, InterruptedException{

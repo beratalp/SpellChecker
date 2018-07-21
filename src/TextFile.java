@@ -30,6 +30,13 @@ public class TextFile {
         writer.close();
     }
 
+    public boolean isEqual (String s) throws IOException{
+        if ( getText().equals(s) ){
+            return true;
+        } else{
+            return false;
+        }
+    }
     public void openFile(File file){
         this.file = file;
     }
@@ -45,5 +52,9 @@ public class TextFile {
 
     public String getPath(){
         return file.getAbsolutePath();
+    }
+
+    public String getShortPath(){
+        return file.getName();
     }
 }
