@@ -125,6 +125,7 @@ public class TextFrame extends JFrame {
 
     public void addComponentsButtons() {
         panel.add(buttonNewFile);
+        buttonNewFile.setToolTipText("New File");
         try{
             Image img = ImageIO.read(getClass().getResource("new.png"));
             buttonNewFile.setIcon(new ImageIcon(img));
@@ -132,6 +133,7 @@ public class TextFrame extends JFrame {
         catch (Exception ex){
             SpellChecker.Error(ex);
         }
+        buttonOpenFile.setToolTipText("Open File");
         panel.add(buttonOpenFile);
         try{
             Image img = ImageIO.read(getClass().getResource("open.png"));
@@ -140,7 +142,7 @@ public class TextFrame extends JFrame {
         catch (Exception ex){
             SpellChecker.Error(ex);
         }
-
+        buttonSave.setToolTipText("Save");
         panel.add(buttonSave);
         try{
             Image img = ImageIO.read(getClass().getResource("save.png"));
