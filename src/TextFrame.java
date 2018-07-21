@@ -136,7 +136,7 @@ public class TextFrame extends JFrame {
         buttonNewFile.addActionListener(new buttonAction());
         buttonDecreaseSize.addActionListener(new buttonAction());
         buttonIncreaseSize.addActionListener(new buttonAction());
-
+        quit.addActionListener(new menuAction());
     }
 
     public void addComponentsButtons() {
@@ -292,8 +292,8 @@ public class TextFrame extends JFrame {
                     try{
                         TextFile file = new TextFile(browseFile.getPath());
                         TextFrame frame = new TextFrame(file);
-                        }
-                        catch(Exception ex){
+                    }
+                    catch(Exception ex){
                         SpellChecker.Error(ex);
                     }
                 }
@@ -375,6 +375,39 @@ public class TextFrame extends JFrame {
                 SetSizeDialog dialog = new SetSizeDialog();
             }else if( e.getSource() == typefaceItem){
                 SetFontDialog dialog = new SetFontDialog();
+            }else if (e.getSource().equals(quit)){
+                try {
+                    if ( file.isEqual(textArea.getText())){
+                        setVisible(false);
+                        dispose();
+                        WelcomeScreen screen = new WelcomeScreen();
+                    } else{
+                        Object[] options = {"Close",
+                                "Cancel", "Save"};
+                        int n = JOptionPane.showOptionDialog(
+                                null,"Save Changes to document \"" + file.getShortPath()+ "\" before closing it ? " ,
+                                "UnSaved Changes",
+                                JOptionPane.YES_NO_OPTION,
+                                JOptionPane.QUESTION_MESSAGE,
+                                null,     //do not use a custom Icon
+                                options,  //the titles of buttons
+                                options[0]); //default button title
+                        if(n == 0){
+                            setVisible(false);
+                            dispose();
+                            try{
+                                new WelcomeScreen();
+                            }
+                            catch (Exception ex){
+                                SpellChecker.Error(ex);
+                            }
+                        }
+                        else if(n == 2){
+                        }
+                    }
+                } catch ( Exception ex){
+
+                }
             }
         }
     }
