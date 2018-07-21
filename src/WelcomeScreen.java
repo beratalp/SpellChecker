@@ -13,6 +13,9 @@ import java.util.*;
 public class WelcomeScreen {
     private static JCheckBox onlineBox;
     private static TextFile file;
+    public static JCheckBox getOnlineBox(){
+        return onlineBox;
+    }
     public static void main(String[] args) throws IOException, InterruptedException{
         String fileName = "recents.txt";
         File recentsFile = new File(fileName);

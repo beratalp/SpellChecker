@@ -1,11 +1,15 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import java.io.*;
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class TextFrame extends JFrame {
 
@@ -95,7 +99,6 @@ public class TextFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
-
     }
 
     public void addActionListeners() {
@@ -121,6 +124,8 @@ public class TextFrame extends JFrame {
         blueText.addActionListener(new menuAction());
         purpleText.addActionListener(new menuAction());
         textArea.addMouseListener(new RightMenuAction());
+        buttonOpenFile.addActionListener(new buttonAction());
+        buttonNewFile.addActionListener(new buttonAction());
     }
 
     public void addComponentsButtons() {
@@ -160,7 +165,6 @@ public class TextFrame extends JFrame {
         catch (Exception ex){
             SpellChecker.Error(ex);
         }
-
         buttonSpellCheck.addActionListener(new buttonAction());
         panel.add(buttonAutoCorrect);
         buttonAutoCorrect.setToolTipText("AutoCorrect");
@@ -267,6 +271,36 @@ public class TextFrame extends JFrame {
                     textArea.setText(String.valueOf(textChars));
                 } catch (Exception exception) {
                     spellChecker.Error(exception);
+                }
+            } else if ( e.getSource().equals(buttonOpenFile) ){
+                JFileChooser fc = new JFileChooser();
+                int returnVal = fc.showOpenDialog(null);
+                File browseFile = fc.getSelectedFile();
+                if(returnVal == 0){
+                    if(WelcomeScreen.getOnlineBox().isSelected()){
+                        SpellChecker.isOnline = true;
+                        }
+                        else{
+                        SpellChecker.isOnline = false;
+                    }
+                    setVisible(false);
+                    try{
+                        TextFile file = new TextFile(browseFile.getPath());
+                        TextFrame frame = new TextFrame(file);
+                        }
+                        catch(Exception ex){
+                        SpellChecker.Error(ex);
+                    }
+                }
+            } else if ( e.getSource().equals( buttonNewFile ) ){
+                try{
+                    TextFile file = new TextFile();
+                    TextFrame frame = new TextFrame(file);
+                    setVisible(false);
+                    dispose();
+                }
+                catch(Exception ex){
+                    SpellChecker.Error(ex);
                 }
             }
         }
