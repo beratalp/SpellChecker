@@ -27,4 +27,8 @@ public abstract class SpellChecker {
         JOptionPane.showMessageDialog(null, s, "Error!", JOptionPane.ERROR_MESSAGE);
         System.exit(0);
     }
+
+    public static void Warning(Exception e, String s){
+        JOptionPane.showMessageDialog(null, e.toString() + "\n" + s, "Warning!", JOptionPane.INFORMATION_MESSAGE);
+    }
 }
