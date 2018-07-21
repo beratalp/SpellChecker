@@ -277,12 +277,6 @@ public class TextFrame extends JFrame {
                 int returnVal = fc.showOpenDialog(null);
                 File browseFile = fc.getSelectedFile();
                 if(returnVal == 0){
-                    if(WelcomeScreen.getOnlineBox().isSelected()){
-                        SpellChecker.isOnline = true;
-                        }
-                        else{
-                        SpellChecker.isOnline = false;
-                    }
                     setVisible(false);
                     try{
                         TextFile file = new TextFile(browseFile.getPath());
@@ -393,7 +387,6 @@ public class TextFrame extends JFrame {
             doc.insertString(location, text, null);
         }
         catch (BadLocationException ex){
-
         }
     }
 }
