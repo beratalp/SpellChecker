@@ -151,9 +151,8 @@ public class TextFrame extends JFrame {
         catch (Exception ex){
             SpellChecker.Error(ex);
         }
-
-
         panel.add(buttonSpellCheck);
+        buttonSpellCheck.setToolTipText("Spell Check");
         try{
             Image img = ImageIO.read(getClass().getResource("spellCheck.png"));
             buttonSpellCheck.setIcon(new ImageIcon(img));
@@ -164,6 +163,7 @@ public class TextFrame extends JFrame {
 
         buttonSpellCheck.addActionListener(new buttonAction());
         panel.add(buttonAutoCorrect);
+        buttonAutoCorrect.setToolTipText("AutoCorrect");
         try{
             Image img = ImageIO.read(getClass().getResource("autoCorrect.png"));
             buttonAutoCorrect.setIcon(new ImageIcon(img));
@@ -172,6 +172,7 @@ public class TextFrame extends JFrame {
             SpellChecker.Error(ex);
         }
         panel.add(buttonIncreaseSize);
+        buttonIncreaseSize.setToolTipText("Increase Size");
         try{
             Image img = ImageIO.read(getClass().getResource("increaseSize.png"));
             buttonIncreaseSize.setIcon(new ImageIcon(img));
@@ -180,6 +181,7 @@ public class TextFrame extends JFrame {
             SpellChecker.Error(ex);
         }
         panel.add(buttonDecreaseSize);
+        buttonDecreaseSize.setToolTipText("Decrease Size");
         try{
             Image img = ImageIO.read(getClass().getResource("decreaseSize.png"));
             buttonDecreaseSize.setIcon(new ImageIcon(img));
