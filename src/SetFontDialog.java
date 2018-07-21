@@ -1,3 +1,5 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 import java.awt.*;
 import javax.swing.*;
@@ -8,6 +10,7 @@ import javax.swing.*;
 public class SetFontDialog extends JDialog{
 
     private JButton applyButton;
+    private JComboBox<Font> fontBox;
 
     public SetFontDialog() {
         setTitle("Set Font");
@@ -16,7 +19,7 @@ public class SetFontDialog extends JDialog{
         GraphicsEnvironment graphEnviron = GraphicsEnvironment.getLocalGraphicsEnvironment();
         Font[] allFonts = graphEnviron.getAllFonts();
 
-        JComboBox<Font> fontBox = new JComboBox<>(allFonts);
+        fontBox = new JComboBox<>(allFonts);
         fontBox.setRenderer(new DefaultListCellRenderer() {
             @Override
             public Component getListCellRendererComponent(JList<?> list,
@@ -30,12 +33,22 @@ public class SetFontDialog extends JDialog{
             }
         });
         JScrollPane scroll = new JScrollPane(fontBox) ;
-        Font defaultFont = new Font("Arial",Font.PLAIN, 1);
+        Font defaultFont = TextFrame.textArea.getFont();
         fontBox.setSelectedItem(defaultFont);
         add(scroll);
         add(applyButton);
+        applyButton.addActionListener(new ButtonListener());
         setSize(300,150);
         setVisible(true);
         setLocationRelativeTo(null);
+    }
+
+    public class ButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            TextFrame.setTextFont((Font) fontBox.getSelectedItem());
+            setVisible(false);
+            dispose();
+        }
     }
 }

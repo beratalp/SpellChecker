@@ -128,6 +128,7 @@ public class TextFrame extends JFrame {
         blueText.addActionListener(new menuAction());
         purpleText.addActionListener(new menuAction());
         sizeItem.addActionListener(new menuAction());
+        typefaceItem.addActionListener(new menuAction());
 
         textArea.addMouseListener(new RightMenuAction());
 
@@ -372,6 +373,8 @@ public class TextFrame extends JFrame {
             }
             else if( e.getSource() == sizeItem){
                 SetSizeDialog dialog = new SetSizeDialog();
+            }else if( e.getSource() == typefaceItem){
+                SetFontDialog dialog = new SetFontDialog();
             }
         }
     }
@@ -420,6 +423,7 @@ public class TextFrame extends JFrame {
     }
 
     public static void setTextFont(Font font){
+        textArea.setFont(font.deriveFont(textSize));
     }
 
     public static void setTextSize(int size){
