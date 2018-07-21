@@ -133,6 +133,8 @@ public class TextFrame extends JFrame {
 
         buttonOpenFile.addActionListener(new buttonAction());
         buttonNewFile.addActionListener(new buttonAction());
+        buttonDecreaseSize.addActionListener(new buttonAction());
+        buttonIncreaseSize.addActionListener(new buttonAction());
 
     }
 
@@ -304,6 +306,22 @@ public class TextFrame extends JFrame {
                 catch(Exception ex){
                     SpellChecker.Error(ex);
                 }
+            } else if( e.getSource().equals( buttonIncreaseSize) ){
+                if(textSize ++ <= 78) {
+                    textSize++;
+                    textArea.setFont(textArea.getFont().deriveFont(textSize));
+                }
+                else{
+                    SpellChecker.Warning(new Exception(), "You can't change size any longer.");
+                }
+            } else if( e.getSource().equals( buttonDecreaseSize) ) {
+                if(textSize -- >= 8) {
+                    textSize--;
+                    textArea.setFont(textArea.getFont().deriveFont(textSize));
+                }
+                else{
+                    SpellChecker.Warning(new Exception(), "You can't change size any longer.");
+                }
             }
         }
     }
@@ -402,7 +420,6 @@ public class TextFrame extends JFrame {
     }
 
     public static void setTextFont(Font font){
-
     }
 
     public static void setTextSize(int size){
