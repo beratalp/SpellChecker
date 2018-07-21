@@ -58,11 +58,11 @@ public class TextFrame extends JFrame {
     JPanel panelCenter = new JPanel();
     JButton buttonSave = new JButton();
     JButton buttonOpenFile = new JButton();
-    JButton buttonNewFile = new JButton("New");
-    JButton buttonSpellCheck = new JButton("SpellChecker");
-    JButton buttonAutoCorrect = new JButton("AutoCorrect");
-    JButton buttonIncreaseSize = new JButton("Increase Size");
-    JButton buttonDecreaseSize = new JButton("Decrease Size");
+    JButton buttonNewFile = new JButton();
+    JButton buttonSpellCheck = new JButton();
+    JButton buttonAutoCorrect = new JButton();
+    JButton buttonIncreaseSize = new JButton();
+    JButton buttonDecreaseSize = new JButton();
 
     private TextFile file;
     private ArrayList<Word> words;
@@ -124,13 +124,22 @@ public class TextFrame extends JFrame {
     public void addComponentsButtons() {
         panel.add(buttonNewFile);
         try{
+            Image img = ImageIO.read(getClass().getResource("new.png"));
+            buttonNewFile.setIcon(new ImageIcon(img));
+        }
+        catch (Exception ex){
+            SpellChecker.Error(ex);
+        }
+        panel.add(buttonOpenFile);
+        try{
             Image img = ImageIO.read(getClass().getResource("open.png"));
             buttonOpenFile.setIcon(new ImageIcon(img));
         }
         catch (Exception ex){
             SpellChecker.Error(ex);
         }
-        panel.add(buttonOpenFile);
+
+        panel.add(buttonSave);
         try{
             Image img = ImageIO.read(getClass().getResource("save.png"));
             buttonSave.setIcon(new ImageIcon(img));
@@ -138,12 +147,42 @@ public class TextFrame extends JFrame {
         catch (Exception ex){
             SpellChecker.Error(ex);
         }
-        panel.add(buttonSave);
+
+
         panel.add(buttonSpellCheck);
+        try{
+            Image img = ImageIO.read(getClass().getResource("spellCheck.png"));
+            buttonSpellCheck.setIcon(new ImageIcon(img));
+        }
+        catch (Exception ex){
+            SpellChecker.Error(ex);
+        }
+
         buttonSpellCheck.addActionListener(new buttonAction());
         panel.add(buttonAutoCorrect);
+        try{
+            Image img = ImageIO.read(getClass().getResource("autoCorrect.png"));
+            buttonAutoCorrect.setIcon(new ImageIcon(img));
+        }
+        catch (Exception ex){
+            SpellChecker.Error(ex);
+        }
         panel.add(buttonIncreaseSize);
+        try{
+            Image img = ImageIO.read(getClass().getResource("increaseSize.png"));
+            buttonIncreaseSize.setIcon(new ImageIcon(img));
+        }
+        catch (Exception ex){
+            SpellChecker.Error(ex);
+        }
         panel.add(buttonDecreaseSize);
+        try{
+            Image img = ImageIO.read(getClass().getResource("decreaseSize.png"));
+            buttonDecreaseSize.setIcon(new ImageIcon(img));
+        }
+        catch (Exception ex){
+            SpellChecker.Error(ex);
+        }
     }
 
     public void addComponentsMenu() {
