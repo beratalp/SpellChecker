@@ -20,7 +20,7 @@ public class About extends JFrame {
     JLabel mailUmer = new JLabel("Umer Shamaan - shamaan0086@gmail.com");
     public About(){
         setLocationRelativeTo(null);
-        panel1.setLayout( new FlowLayout( FlowLayout.LEADING, 63,5) ) ;
+        panel1.setLayout( new FlowLayout( FlowLayout.LEFT,0,10) ) ;
         panel1.add(mailAlp);
         panel1.add(mailBeril );
         panel1.add(mailSalman);
@@ -41,8 +41,8 @@ public class About extends JFrame {
         }
         panelTop.add( label, BorderLayout.SOUTH );
         setLayout(new GridLayout(2,1));
-        tabPane.add("Mails", panel1);
-        tabPane.add("", panel2);
+        tabPane.add("Developers", panel1);
+        tabPane.add("Open Source Licenses", panel2);
         add(panelTop);
         add(tabPane);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

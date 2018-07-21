@@ -141,7 +141,7 @@ public class WelcomeScreen {
         helpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SpellChecker.Error("Not implemented yet.");
+                new About();
             }
         });
         panel.setBackground(Color.decode("#455A64"));

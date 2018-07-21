@@ -1,10 +1,10 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.net.*;
+import java.util.Scanner;
 import javax.net.ssl.HttpsURLConnection;
 import org.json.simple.*;
 import org.json.simple.parser.*;
-
 
 
 public class SpellCheckerOnline extends SpellChecker {
@@ -83,6 +83,11 @@ public class SpellCheckerOnline extends SpellChecker {
 
     @Override
     public ArrayList<Word> findSynonyms(String str, Language lang) {
+        //JSONObject synonym =
+        Scanner stringScanner = new Scanner(str);
+        while(stringScanner.hasNext()){
+
+        }
         return null;
     }
 
