@@ -1,14 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.*;
 import java.io.*;
 import javax.imageio.ImageIO;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
 
 public class TextFrame extends JFrame {
 
-    JTextPane textArea = new JTextPane();
+    static JTextPane textArea = new JTextPane();
     JMenuBar menuBar = new JMenuBar();
     JMenu fileMenu = new JMenu("File");
     JMenu editMenu = new JMenu("Edit");
@@ -119,6 +120,7 @@ public class TextFrame extends JFrame {
         darkBlueText.addActionListener(new menuAction());
         blueText.addActionListener(new menuAction());
         purpleText.addActionListener(new menuAction());
+        textArea.addMouseListener(new RightMenuAction());
     }
 
     public void addComponentsButtons() {
@@ -310,6 +312,50 @@ public class TextFrame extends JFrame {
             }else if ( e.getSource() == orangeText ){
                 textArea.setForeground(Color.decode("#E64A19"));
             }
+        }
+    }
+    class RightMenuAction implements MouseListener{
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if(SwingUtilities.isRightMouseButton(e)){
+                RightClickMenu menu = new RightClickMenu();
+                menu.show(e.getComponent(), e.getX(), e.getY());
+            }
+        }
+    }
+
+    public static String getSelected(){
+        return textArea.getSelectedText();
+    }
+
+    public static void pasteText(String text){
+        int location = textArea.getCaretPosition();
+        Document doc = textArea.getDocument();
+        try{
+            doc.insertString(location, text, null);
+        }
+        catch (BadLocationException ex){
+
         }
     }
 }
