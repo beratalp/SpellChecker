@@ -19,7 +19,6 @@ public class About extends JFrame {
     private JLabel mailHassam = new JLabel("Hassam Abdullah - hassamabdullah1@gmail.com");
     private JLabel mailUmer = new JLabel("Umer Shamaan - shamaan0086@gmail.com");
     public About(){
-
         panel1.setLayout( new FlowLayout( FlowLayout.LEFT,0,10) ) ;
         panel1.add(mailAlp);
         panel1.add(mailBeril );
@@ -45,7 +44,7 @@ public class About extends JFrame {
         tabPane.add("Open Source Licenses", panel2);
         add(panelTop);
         add(tabPane);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(400,400);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -111,7 +110,6 @@ public class About extends JFrame {
         public void mouseEntered(MouseEvent e) {
         }
         public void mouseExited(MouseEvent e) {
-
         }
     }
 }

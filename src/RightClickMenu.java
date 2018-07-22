@@ -32,6 +32,7 @@ public class RightClickMenu extends JPopupMenu {
     public void addActionListeners(){
         copy.addActionListener(new CopyAction());
         paste.addActionListener(new PasteAction());
+        cut.addActionListener(new CutAction());
     }
 
     public class CopyAction implements ActionListener {
@@ -50,6 +51,21 @@ public class RightClickMenu extends JPopupMenu {
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             try{
                 TextFrame.pasteText((String) clipboard.getData(DataFlavor.stringFlavor));
+            }
+            catch (Exception ex){
+                SpellChecker.Warning(ex, "You shouldn't have done that.");
+            }
+        }
+    }
+    public class CutAction implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+            String selected = TextFrame.getSelected();
+            try{
+                TextFrame.cutText(selected);
+                StringSelection selection = new StringSelection(selected);
+                clipboard.setContents(selection, null);
             }
             catch (Exception ex){
                 SpellChecker.Warning(ex, "You shouldn't have done that.");

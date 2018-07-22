@@ -59,7 +59,6 @@ public class TextFrame extends JFrame {
     JCheckBoxMenuItem onlineMode = new JCheckBoxMenuItem("Online Mode");
     SpellChecker spellChecker;
 
-
     JPanel panel = new JPanel();
     JPanel panelCenter = new JPanel();
     JButton buttonSave = new JButton();
@@ -80,7 +79,6 @@ public class TextFrame extends JFrame {
     public TextFrame(TextFile file) throws Exception {
         this.file = file;
         panelCenter.add(textArea);
-
         initializeTextField(file);
         setJMenuBar(menuBar);
         if(SpellChecker.isOnline){
@@ -139,6 +137,7 @@ public class TextFrame extends JFrame {
         about.addActionListener(new menuAction());
         openFile.addActionListener(new menuAction());
         saveAsFile.addActionListener(new menuAction());
+        newFile.addActionListener(new menuAction());
     }
 
     public void addComponentsButtons() {
@@ -419,6 +418,7 @@ public class TextFrame extends JFrame {
                                     textArea.write(new OutputStreamWriter(new FileOutputStream(file),
                                             "utf-8"));
                                 } catch (Exception ex) {
+                                    SpellChecker.Error(ex);
                                 }
                             }
                             setVisible(false);
@@ -427,10 +427,10 @@ public class TextFrame extends JFrame {
                         }
                     }
                 } catch ( Exception ex){
-
                 }
             } else if ( e.getSource() == about ){
-                new About();
+                About about = new About();
+                System.out.println("Fuck");
             } else if ( e.getSource() == openFile ) {
                 JFileChooser fc = new JFileChooser();
                 int returnVal = fc.showOpenDialog(null);
@@ -460,16 +460,19 @@ public class TextFrame extends JFrame {
                         textArea.write(new OutputStreamWriter(new FileOutputStream(file),
                                 "utf-8"));
                     } catch (Exception ex) {
+                        SpellChecker.Error(ex);
                     }
                 }
-                setVisible(false);
-                dispose();
+            } else if ( e.getSource() == newFile ){
                 try{
-                    new WelcomeScreen();
-                } catch (Exception ex){
-
+                    TextFile file = new TextFile();
+                    TextFrame frame = new TextFrame(file);
+                    setVisible(false);
+                    dispose();
                 }
-
+                catch(Exception ex){
+                    SpellChecker.Error(ex);
+                }
             }
         }
     }
@@ -507,6 +510,7 @@ public class TextFrame extends JFrame {
         return textArea.getSelectedText();
     }
 
+
     public static void pasteText(String text){
         int location = textArea.getCaretPosition();
         Document doc = textArea.getDocument();
@@ -515,6 +519,16 @@ public class TextFrame extends JFrame {
         }
         catch (BadLocationException ex){
         }
+    }
+
+    public static void cutText(String selection){
+        try {
+            if(selection == null){
+                return;
+            }
+            textArea.replaceSelection("");
+        } catch( Exception ex ){
+            }
     }
 
     public static void setTextFont(Font font){
