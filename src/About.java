@@ -19,7 +19,7 @@ public class About extends JFrame {
     JLabel mailHassam = new JLabel("Hassam Abdullah - hassamabdullah1@gmail.com");
     JLabel mailUmer = new JLabel("Umer Shamaan - shamaan0086@gmail.com");
     public About(){
-        setLocationRelativeTo(null);
+
         panel1.setLayout( new FlowLayout( FlowLayout.LEFT,0,10) ) ;
         panel1.add(mailAlp);
         panel1.add(mailBeril );
@@ -47,6 +47,7 @@ public class About extends JFrame {
         add(tabPane);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(400,400);
+        setLocationRelativeTo(null);
         setVisible(true);
     }
     public void addMouseListeners(){

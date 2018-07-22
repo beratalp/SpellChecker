@@ -129,14 +129,13 @@ public class TextFrame extends JFrame {
         purpleText.addActionListener(new menuAction());
         sizeItem.addActionListener(new menuAction());
         typefaceItem.addActionListener(new menuAction());
-
         textArea.addMouseListener(new RightMenuAction());
-
         buttonOpenFile.addActionListener(new buttonAction());
         buttonNewFile.addActionListener(new buttonAction());
         buttonDecreaseSize.addActionListener(new buttonAction());
         buttonIncreaseSize.addActionListener(new buttonAction());
         quit.addActionListener(new menuAction());
+        about.addActionListener(new menuAction());
     }
 
     public void addComponentsButtons() {
@@ -408,6 +407,8 @@ public class TextFrame extends JFrame {
                 } catch ( Exception ex){
 
                 }
+            } else if ( e.getSource() == about ){
+                About about = new About();
             }
         }
     }
