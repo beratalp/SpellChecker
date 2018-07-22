@@ -8,16 +8,16 @@ import java.io.File;
 import java.net.URI;
 
 public class About extends JFrame {
-    JPanel panelTop = new JPanel();
-    JLabel label = new JLabel(SpellChecker.APP_NAME + " " + SpellChecker.VERSION , SwingConstants.CENTER);
-    JTabbedPane tabPane = new JTabbedPane();
-    JPanel panel2 = new JPanel();
-    JPanel panel1 = new JPanel();
-    JLabel mailAlp = new JLabel("Berat Alp Erbil - beratalp@gmail.com");
-    JLabel mailBeril = new JLabel("Beril Bayram - berilbayram@gmail.com");
-    JLabel mailSalman = new JLabel("Salman Soomro - salmanakhtar@gmail.com ");
-    JLabel mailHassam = new JLabel("Hassam Abdullah - hassamabdullah1@gmail.com");
-    JLabel mailUmer = new JLabel("Umer Shamaan - shamaan0086@gmail.com");
+    private JPanel panelTop = new JPanel();
+    private JLabel label = new JLabel(SpellChecker.APP_NAME + " " + SpellChecker.VERSION , SwingConstants.CENTER);
+    private JTabbedPane tabPane = new JTabbedPane();
+    private JPanel panel2 = new JPanel();
+    private JPanel panel1 = new JPanel();
+    private JLabel mailAlp = new JLabel("Berat Alp Erbil - beratalp@gmail.com");
+    private JLabel mailBeril = new JLabel("Beril Bayram - berilbayram@gmail.com");
+    private JLabel mailSalman = new JLabel("Salman Soomro - salmanakhtar@gmail.com ");
+    private JLabel mailHassam = new JLabel("Hassam Abdullah - hassamabdullah1@gmail.com");
+    private JLabel mailUmer = new JLabel("Umer Shamaan - shamaan0086@gmail.com");
     public About(){
 
         panel1.setLayout( new FlowLayout( FlowLayout.LEFT,0,10) ) ;
@@ -50,7 +50,7 @@ public class About extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-    public void addMouseListeners(){
+    private void addMouseListeners(){
         mailAlp.addMouseListener( new mouseEvent());
         mailBeril.addMouseListener( new mouseEvent());
         mailSalman.addMouseListener( new mouseEvent());

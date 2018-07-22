@@ -10,9 +10,10 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 
 public class TextFrame extends JFrame {
-
     static JTextPane textArea = new JTextPane();
     JMenuBar menuBar = new JMenuBar();
     JMenu fileMenu = new JMenu("File");
@@ -136,6 +137,8 @@ public class TextFrame extends JFrame {
         buttonIncreaseSize.addActionListener(new buttonAction());
         quit.addActionListener(new menuAction());
         about.addActionListener(new menuAction());
+        openFile.addActionListener(new menuAction());
+        saveAsFile.addActionListener(new menuAction());
     }
 
     public void addComponentsButtons() {
@@ -289,8 +292,8 @@ public class TextFrame extends JFrame {
                 if(returnVal == 0){
                     setVisible(false);
                     try{
-                        TextFile file = new TextFile(browseFile.getPath());
-                        TextFrame frame = new TextFrame(file);
+                        TextFile fileOpen = new TextFile(browseFile.getPath());
+                        TextFrame frameNew = new TextFrame(fileOpen);
                     }
                     catch(Exception ex){
                         SpellChecker.Error(ex);
@@ -326,7 +329,7 @@ public class TextFrame extends JFrame {
         }
     }
 
-    class menuAction implements ActionListener {
+    public class menuAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == blackBackground) {
@@ -388,9 +391,9 @@ public class TextFrame extends JFrame {
                                 "UnSaved Changes",
                                 JOptionPane.YES_NO_OPTION,
                                 JOptionPane.QUESTION_MESSAGE,
-                                null,     //do not use a custom Icon
-                                options,  //the titles of buttons
-                                options[0]); //default button title
+                                null,
+                                options,
+                                options[0]);
                         if(n == 0){
                             setVisible(false);
                             dispose();
@@ -402,13 +405,71 @@ public class TextFrame extends JFrame {
                             }
                         }
                         else if(n == 2){
+                            JFileChooser fileChooser = new JFileChooser();
+                            int returnValue = fileChooser.showSaveDialog(saveFile);
+                            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                                File file = fileChooser.getSelectedFile();
+                                if (file == null) {
+                                    return;
+                                }
+                                if (!file.getName().toLowerCase().endsWith(".txt")) {
+                                    file = new File(file.getParentFile(), file.getName() + ".txt");
+                                }
+                                try {
+                                    textArea.write(new OutputStreamWriter(new FileOutputStream(file),
+                                            "utf-8"));
+                                } catch (Exception ex) {
+                                }
+                            }
+                            setVisible(false);
+                            dispose();
+                            new WelcomeScreen();
                         }
                     }
                 } catch ( Exception ex){
 
                 }
             } else if ( e.getSource() == about ){
-                About about = new About();
+                new About();
+            } else if ( e.getSource() == openFile ) {
+                JFileChooser fc = new JFileChooser();
+                int returnVal = fc.showOpenDialog(null);
+                File browseFile = fc.getSelectedFile();
+                if(returnVal == 0){
+                    setVisible(false);
+                    try{
+                        TextFile file = new TextFile(browseFile.getPath());
+                        TextFrame frame = new TextFrame(file);
+                    }
+                    catch(Exception ex){
+                        SpellChecker.Error(ex);
+                    }
+                }
+            } else if ( e.getSource() == saveAsFile ){
+                JFileChooser fileChooser = new JFileChooser();
+                int returnValue = fileChooser.showSaveDialog(saveFile);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    File file = fileChooser.getSelectedFile();
+                    if (file == null) {
+                        return;
+                    }
+                    if (!file.getName().toLowerCase().endsWith(".txt")) {
+                        file = new File(file.getParentFile(), file.getName() + ".txt");
+                    }
+                    try {
+                        textArea.write(new OutputStreamWriter(new FileOutputStream(file),
+                                "utf-8"));
+                    } catch (Exception ex) {
+                    }
+                }
+                setVisible(false);
+                dispose();
+                try{
+                    new WelcomeScreen();
+                } catch (Exception ex){
+
+                }
+
             }
         }
     }
