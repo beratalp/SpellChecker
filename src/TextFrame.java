@@ -71,9 +71,11 @@ public class TextFrame extends JFrame {
     JButton buttonAutoCorrect = new JButton();
     JButton buttonIncreaseSize = new JButton();
     JButton buttonDecreaseSize = new JButton();
+    RightClickMenu rightClickMenu;
 
     private TextFile file;
     private ArrayList<Word> words;
+    private ArrayList<Word> synonyms;
 
     private static float textSize = 12;
     private static Font textFont;
@@ -276,9 +278,13 @@ public class TextFrame extends JFrame {
                     spellChecker = new SpellCheckerOffline();
                 try {
                     words = spellChecker.spellCheck(textArea.getText(), SpellChecker.Language.ENGLISH);
+                    synonyms = spellChecker.findSynonyms(textArea.getText(), SpellChecker.Language.ENGLISH);
                     for(Word word: words){
                         System.out.println(word.getOrig());
                         underLineWord(word.getOrig(), word.getIndex());
+                    }
+                    for(Word word: synonyms){
+                        words.add(word);
                     }
                 } catch (Exception exception) {
                     spellChecker.Error(exception);
@@ -323,17 +329,7 @@ public class TextFrame extends JFrame {
                 else{
                     SpellChecker.Warning(new Exception(), "You can't change size any longer.");
                 }
-            } else if(e.getSource().equals(buttonSave)){
-                SpellChecker spellChecker = new SpellCheckerOnline();
-                try{
-                    words = spellChecker.findSynonyms(textArea.getText(), SpellChecker.Language.ENGLISH);
-                    for(Word word: words){
-                        System.out.println(word.getSuggestions());
-                    }
-                }
-                catch (Exception ex){
-                    SpellChecker.Error(ex);
-                }
+            } else if(e.getSource().equals(buttonSave)) {
             }
         }
     }
@@ -504,9 +500,9 @@ public class TextFrame extends JFrame {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            if(SwingUtilities.isRightMouseButton(e)){
-                RightClickMenu menu = new RightClickMenu();
-                menu.show(e.getComponent(), e.getX(), e.getY());
+            if(SwingUtilities.isRightMouseButton(e)) {
+                populateMenu();
+                rightClickMenu.show(e.getComponent(), e.getX(), e.getY());
             }
         }
     }
@@ -547,11 +543,72 @@ public class TextFrame extends JFrame {
     public static String getTextSize(){
         return ((int) textSize) + "";
     }
+
     public void underLineWord(String word, int offset){
         SimpleAttributeSet attributeSet = new SimpleAttributeSet();
         StyleConstants.setUnderline(attributeSet, true);
         textArea.getStyledDocument().setCharacterAttributes(offset, word.length(),
                 attributeSet, true);
     }
+
+    public void populateMenu(){
+        rightClickMenu = new RightClickMenu();
+        String text = "";
+        boolean textSet = false;
+        int caretPosition = textArea.getCaretPosition();
+        char c = ' ';
+        try{
+            c = textArea.getText(caretPosition, 1).charAt(0);
+        }
+        catch (Exception ex){
+            SpellChecker.Error(ex);
+        }
+        while(c != ' '){
+            try{
+                c = textArea.getText(caretPosition, 1).charAt(0);
+            }
+            catch (Exception ex){
+                String[] textArray = textArea.getText().split(" ");
+                text = textArray[0];
+                System.out.println(text);
+                textSet = true;
+                break;
+            }
+            System.out.println(caretPosition);
+            caretPosition--;
+        }
+        caretPosition += 2;
+        System.out.println(caretPosition);
+        try{
+            c = textArea.getText(caretPosition, 1).charAt(0);
+        }
+        catch (Exception ex){
+            SpellChecker.Error(ex);
+        }
+        while(c != ' ') {
+            try {
+                c = textArea.getText(caretPosition, 1).charAt(0);
+                if(!textSet)
+                    text += c;
+            } catch (Exception ex) {
+                String[] textArray = textArea.getText().split(" ");
+                text = textArea.getText().split(" ")[textArray.length - 1];
+                break;
+            }
+            caretPosition++;
+        }
+        try{
+            for(Word word: words){
+                if(word.getOrig().equals(text.trim())){
+                    for(String suggestion: word.getSuggestions()){
+                        rightClickMenu.addSuggestion(suggestion);
+                    }
+                }
+            }
+        }
+        catch (Exception ex){
+        }
+    }
+
 }
 

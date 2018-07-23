@@ -4,6 +4,7 @@ public class Word {
     private int index;
     private ArrayList<String> suggestions = new ArrayList<>();
     private String orig;
+    private boolean isWrong = false;
 
     public Word(){
         super();
@@ -14,7 +15,7 @@ public class Word {
     }
 
     public void addSuggestion(String str){
-        suggestions.add(str);
+        suggestions.add(str.replace('-',' '));
     }
 
     public int getIndex() {
@@ -31,5 +32,13 @@ public class Word {
 
     public void setOrig(String orig) {
         this.orig = orig;
+    }
+
+    public boolean isWrong() {
+        return isWrong;
+    }
+
+    public void setWrong(boolean wrong) {
+        isWrong = wrong;
     }
 }

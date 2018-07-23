@@ -21,6 +21,7 @@ public class RightClickMenu extends JPopupMenu {
         add(copy);
         add(cut);
         add(paste);
+        add(new JSeparator());
     }
 
     public void setComponents(){
@@ -71,5 +72,10 @@ public class RightClickMenu extends JPopupMenu {
                 SpellChecker.Warning(ex, "You shouldn't have done that.");
             }
         }
+    }
+
+    public void addSuggestion(String suggestion){
+        JMenuItem suggestionItem = new JMenuItem(suggestion);
+        add(suggestionItem);
     }
 }

@@ -81,6 +81,7 @@ public class SpellCheckerOnline extends SpellChecker {
             JSONArray suggestions = (JSONArray) ((JSONObject)jsonArray.get(i)).get("suggestions");
             word.setOrig((String) ((JSONObject)jsonArray.get(i)).get("token"));
             word.setIndex(Integer.parseInt((((JSONObject) jsonArray.get(i)).get("offset")).toString()));
+            word.setWrong(true);
             for(int j = 0; j < suggestions.size(); j++){
                 word.addSuggestion((String) ((JSONObject) suggestions.get(j)).get("suggestion"));
             }
@@ -119,7 +120,6 @@ public class SpellCheckerOnline extends SpellChecker {
 
             }
             catch (Exception ex){
-                SpellChecker.Error(ex);
             }
             iterator ++;
             words.add(word);
