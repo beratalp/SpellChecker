@@ -1,5 +1,6 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.SimpleAttributeSet;
@@ -20,7 +21,7 @@ public class TextFrame extends JFrame {
     JMenu fileMenu = new JMenu("File");
     JMenu editMenu = new JMenu("Edit");
     JMenu settingsMenu = new JMenu("Settings");
-    JMenu helpMenu = new JMenu("Help");
+    JMenu helpMenu = new JMenu("Help   ");
     JMenu textMenu = new JMenu("Text");
     JMenu backgroundMenu = new JMenu("Background");
     JMenu backgroundColorMenu = new JMenu("Color");
@@ -62,6 +63,7 @@ public class TextFrame extends JFrame {
 
     JPanel panel = new JPanel();
     JPanel panelCenter = new JPanel();
+    JPanel panelLow = new JPanel();
     JButton buttonSave = new JButton();
     JButton buttonOpenFile = new JButton();
     JButton buttonNewFile = new JButton();
@@ -69,6 +71,7 @@ public class TextFrame extends JFrame {
     JButton buttonAutoCorrect = new JButton();
     JButton buttonIncreaseSize = new JButton();
     JButton buttonDecreaseSize = new JButton();
+    JLabel label = new JLabel("Word Count");
     RightClickMenu rightClickMenu;
 
     private TextFile file;
@@ -98,6 +101,8 @@ public class TextFrame extends JFrame {
         addActionListeners();
         add(panel, BorderLayout.NORTH);
         add(panelCenter,BorderLayout.CENTER);
+        add(panelLow , BorderLayout.SOUTH);
+        addStatusBar();
         panel.setBackground(Color.decode("#455A64"));
         panelCenter.setBackground(Color.decode("#455A64"));
         setTitle(file.getShortPath());
@@ -145,6 +150,12 @@ public class TextFrame extends JFrame {
         openFile.addActionListener(new menuAction());
         saveAsFile.addActionListener(new menuAction());
         newFile.addActionListener(new menuAction());
+    }
+    public void addStatusBar(){
+        panelLow.setLayout(new BoxLayout(panelLow, BoxLayout.X_AXIS));
+        panelLow.setBorder(new BevelBorder(BevelBorder.LOWERED));
+        label.setHorizontalAlignment(SwingConstants.LEFT);
+        panelLow.add(label);
     }
 
     public void addComponentsButtons() {
