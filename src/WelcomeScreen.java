@@ -1,5 +1,3 @@
-import javafx.application.Application;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +8,8 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class WelcomeScreen {
 
@@ -33,6 +32,7 @@ public class WelcomeScreen {
         frame.setSize(600, 500);
         frame.setLocationRelativeTo(null);
         frame.setTitle(SpellChecker.APP_NAME + " " + SpellChecker.VERSION);
+
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         String[] recents = new String[recentsArray.size()];
@@ -41,16 +41,8 @@ public class WelcomeScreen {
         }
         BufferedImage logo = ImageIO.read(new File("logo.png"));
         frame.setIconImage(logo);
-        System.out.println(System.getProperty("os.name"));
-        if(System.getProperty("os.name").startsWith("Mac")){
-            try {
-                com.apple.eawt.Application.getApplication().setDockIconImage(logo);
-            }
-            catch (Exception ex){
-                SpellChecker.Error(ex);
-            }
-        }
         JList<String> recentList = new JList<String>(recents);
+        frame.setIconImage(logo);
         recentList.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {

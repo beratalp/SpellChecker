@@ -2,16 +2,18 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 
 public class TextFrame extends JFrame {
     static JTextPane textArea = new JTextPane();
@@ -99,6 +101,7 @@ public class TextFrame extends JFrame {
         JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         getContentPane().add(scrollPane);
+        underLineWord(textArea.getText());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -272,15 +275,9 @@ public class TextFrame extends JFrame {
                     spellChecker = new SpellCheckerOffline();
                 try {
                     words = spellChecker.spellCheck(textArea.getText(), SpellChecker.Language.ENGLISH);
-                    char[] textChars = textArea.getText().toCharArray();
-                    int wordIndex = 0;
                     for(Word word: words){
-                        for(int i = word.getIndex(); i < word.getSuggestions().get(0).length(); i ++){
-                            textChars[i] = word.getSuggestions().get(0).charAt(wordIndex);
-                            wordIndex ++;
-                        }
+                        underLineWord(word.getSuggestions().get(0));
                     }
-                    textArea.setText(String.valueOf(textChars));
                 } catch (Exception exception) {
                     spellChecker.Error(exception);
                 }
@@ -430,7 +427,6 @@ public class TextFrame extends JFrame {
                 }
             } else if ( e.getSource() == about ){
                 About about = new About();
-                System.out.println("Fuck");
             } else if ( e.getSource() == openFile ) {
                 JFileChooser fc = new JFileChooser();
                 int returnVal = fc.showOpenDialog(null);
@@ -541,6 +537,12 @@ public class TextFrame extends JFrame {
     }
     public static String getTextSize(){
         return ((int) textSize) + "";
+    }
+    public void underLineWord(String word){
+        SimpleAttributeSet attributeSet = new SimpleAttributeSet();
+        StyleConstants.setUnderline(attributeSet, true);
+        textArea.getStyledDocument().setCharacterAttributes(0, word.length(),
+                attributeSet, true);
     }
 }
 
