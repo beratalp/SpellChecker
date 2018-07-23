@@ -49,8 +49,6 @@ public class TextFrame extends JFrame {
     JMenuItem greenText = new JMenuItem("Green");
     JMenuItem purpleText = new JMenuItem("Purple");
     JMenuItem pinkText = new JMenuItem("Pink");
-    JMenuItem english = new JMenuItem("English");
-    JMenuItem turkish = new JMenuItem("Turkish");
     JMenuItem newFile = new JMenuItem("New");
     JMenuItem openFile = new JMenuItem("Open");
     JMenuItem saveFile = new JMenuItem("Save");
@@ -59,6 +57,8 @@ public class TextFrame extends JFrame {
     JMenuItem about = new JMenuItem("About");
     JMenuItem forum = new JMenuItem("Forum");
     JCheckBoxMenuItem onlineMode = new JCheckBoxMenuItem("Online Mode");
+    JCheckBoxMenuItem englishMode = new JCheckBoxMenuItem("English");
+    JCheckBoxMenuItem turkishMode = new JCheckBoxMenuItem( "Turkish" );
     SpellChecker spellChecker;
 
     JPanel panel = new JPanel();
@@ -95,10 +95,12 @@ public class TextFrame extends JFrame {
         if(!SpellCheckerOnline.isConnectionWorks()){
             onlineMode.setEnabled(false);
         }
+
         addComponentsButtons();
         addComponentsMenu();
         addComponentsMenuItems();
         addActionListeners();
+        englishMode.setSelected(true);
         add(panel, BorderLayout.NORTH);
         add(panelCenter,BorderLayout.CENTER);
         add(panelLow , BorderLayout.SOUTH);
@@ -110,6 +112,7 @@ public class TextFrame extends JFrame {
         JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         getContentPane().add(scrollPane);
+        System.out.println(englishMode.isSelected());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -150,6 +153,8 @@ public class TextFrame extends JFrame {
         openFile.addActionListener(new menuAction());
         saveAsFile.addActionListener(new menuAction());
         newFile.addActionListener(new menuAction());
+        englishMode.addActionListener(new menuAction());
+        turkishMode.addActionListener(new menuAction());
     }
     public void addStatusBar(){
         panelLow.setLayout(new BoxLayout(panelLow, BoxLayout.X_AXIS));
@@ -268,8 +273,8 @@ public class TextFrame extends JFrame {
         fileMenu.add(quit);
         settingsMenu.add(onlineMode);
         settingsMenu.add(languageMenu);
-        languageMenu.add(english);
-        languageMenu.add(turkish);
+        languageMenu.add(englishMode);
+        languageMenu.add(turkishMode);
         helpMenu.add(forum);
         helpMenu.add(new JSeparator());
         helpMenu.add(about);
@@ -459,6 +464,12 @@ public class TextFrame extends JFrame {
                 catch(Exception ex){
                     SpellChecker.Error(ex);
                 }
+            } else if ( e.getSource() == englishMode ){
+                    turkishMode.setState(false);
+            }
+            else if ( e.getSource() == turkishMode){
+                System.out.println("Fuck");
+                    englishMode.setState(false);
             }
         }
     }
