@@ -25,6 +25,7 @@ public class TextFile {
 
 
     public void saveFile(File file, String text) throws IOException {
+        System.out.println("Fuck");
         writer = new PrintWriter(file);
         writer.print(text);
         writer.close();

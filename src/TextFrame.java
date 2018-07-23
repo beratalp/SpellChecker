@@ -446,17 +446,14 @@ public class TextFrame extends JFrame {
                 JFileChooser fileChooser = new JFileChooser();
                 int returnValue = fileChooser.showSaveDialog(saveFile);
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
-                    File file = fileChooser.getSelectedFile();
-                    if (file == null) {
+                    File newFile = fileChooser.getSelectedFile();
+                    if (newFile == null) {
                         return;
                     }
-                    if (!file.getName().toLowerCase().endsWith(".txt")) {
-                        file = new File(file.getParentFile(), file.getName() + ".txt");
+                    try{
+                        file.saveFile(newFile, textArea.getText());
                     }
-                    try {
-                        textArea.write(new OutputStreamWriter(new FileOutputStream(file),
-                                "utf-8"));
-                    } catch (Exception ex) {
+                    catch (Exception ex){
                         SpellChecker.Error(ex);
                     }
                 }
