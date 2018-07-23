@@ -45,7 +45,7 @@ public class TextFile {
         fileScanner = new Scanner(file);
         String returnString = "";
         while(fileScanner.hasNext()){
-            returnString += fileScanner.nextLine();
+            returnString += (fileScanner.nextLine() + "\n");
         }
         return returnString;
     }

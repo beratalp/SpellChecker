@@ -19,26 +19,14 @@ public class WelcomeScreen {
     private static JCheckBox onlineBox;
     private static TextFile file;
     public static void main(String[] args) throws IOException, InterruptedException{
-        String fileName = "recents.txt";
-        File recentsFile = new File(fileName);
-        ArrayList<String> recentsArray = new ArrayList<String>();
-        Scanner fileScan = new Scanner(recentsFile);
-        while (fileScan.hasNext()) {
-            recentsArray.add(fileScan.next());
-        }if(recentsArray.size() == 0){
-            recentsArray.add("No recent files");
-        }
+        RecentList recent = new RecentList();
+        String[] recents = recent.getRecents();
         JFrame frame = new JFrame();
         frame.setSize(600, 500);
         frame.setLocationRelativeTo(null);
         frame.setTitle(SpellChecker.APP_NAME + " " + SpellChecker.VERSION);
-
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        String[] recents = new String[recentsArray.size()];
-        for (int i = 0; i < recentsArray.size(); i++) {
-            recents[i] = recentsArray.get(i);
-        }
         BufferedImage logo = ImageIO.read(new File("logo.png"));
         frame.setIconImage(logo);
         JList<String> recentList = new JList<String>(recents);

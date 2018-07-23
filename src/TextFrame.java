@@ -100,6 +100,7 @@ public class TextFrame extends JFrame {
         add(panelCenter,BorderLayout.CENTER);
         panel.setBackground(Color.decode("#455A64"));
         panelCenter.setBackground(Color.decode("#455A64"));
+        setTitle(file.getShortPath());
         setSize(950, 800);
         JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -625,6 +626,5 @@ public class TextFrame extends JFrame {
             }
         }
     }
-
 }
 
