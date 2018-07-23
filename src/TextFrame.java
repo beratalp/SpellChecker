@@ -72,12 +72,13 @@ public class TextFrame extends JFrame {
     RightClickMenu rightClickMenu;
 
     private TextFile file;
-    private ArrayList<Word> words;
-    private ArrayList<Word> synonyms;
+    private static ArrayList<Word> words;
+    private static ArrayList<Word> synonyms;
 
     private static float textSize = 12;
     private static Font textFont;
     public static String toReplace;
+
 
 
     public TextFrame(TextFile file) throws Exception {
@@ -514,11 +515,17 @@ public class TextFrame extends JFrame {
         return ((int) textSize) + "";
     }
 
-    public void underLineWord(String word, int offset){
+    public static void underLineWord(String word, int offset){
         SimpleAttributeSet attributeSet = new SimpleAttributeSet();
         StyleConstants.setUnderline(attributeSet, true);
         textArea.getStyledDocument().setCharacterAttributes(offset, word.length(),
                 attributeSet, true);
+    }
+
+
+    public static void removeUnderLine(){
+        SimpleAttributeSet attributeSet = new SimpleAttributeSet();
+        textArea.getStyledDocument().setCharacterAttributes(0, textArea.getText().length(), attributeSet, true);
     }
 
     public void populateMenu(){
@@ -540,11 +547,9 @@ public class TextFrame extends JFrame {
             catch (Exception ex){
                 String[] textArray = textArea.getText().split(" ");
                 text = textArray[0];
-                System.out.println(text);
                 textSet = true;
                 break;
             }
-            System.out.println(caretPosition);
             caretPosition--;
         }
         caretPosition += 2;
@@ -598,7 +603,27 @@ public class TextFrame extends JFrame {
     }
 
     public static void replaceText(String orig, String news){
+        news = news + " ";
+        for(Word word: synonyms){
+            if(word.getOrig().equals(orig)){
+                news.trim();
+            }
+        }
         textArea.setText(textArea.getText().replaceFirst(orig, news));
+        removeUnderLine();
+        for(int i = 0; i < words.size(); i ++){
+            if(words.get(i).getOrig().equals(orig) && words.get(i).isWrong()){
+                words.get(i).setWrong(false);
+            }
+        }
+        for(Word word: words){
+            if(word.isWrong()){
+                System.out.println(word.getOrig());
+                int index = textArea.getText().indexOf(word.getOrig());
+                if(index != -1)
+                    underLineWord(word.getOrig(), index);
+            }
+        }
     }
 
 }

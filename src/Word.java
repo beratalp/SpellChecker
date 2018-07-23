@@ -39,6 +39,6 @@ public class Word {
     }
 
     public void setWrong(boolean wrong) {
-        isWrong = wrong;
+        this.isWrong = wrong;
     }
 }
