@@ -1,10 +1,15 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.net.*;
+import java.util.HashMap;
 import java.util.Scanner;
 import javax.net.ssl.HttpsURLConnection;
 import org.json.simple.*;
 import org.json.simple.parser.*;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 
 public class SpellCheckerOnline extends SpellChecker {
@@ -12,8 +17,10 @@ public class SpellCheckerOnline extends SpellChecker {
     private File keyfile = new File("keys.txt");
     private String keyString;
     Key key;
-    private final String HOST = "https://api.cognitive.microsoft.com";
-    private final String PATH = "/bing/v7.0/spellcheck";
+    private final String AZURE_HOST = "https://api.cognitive.microsoft.com";
+    private final String AZURE_PATH = "/bing/v7.0/spellcheck";
+    private final String RAPID_HOST = "https://wordsapiv1.p.mashape.com/words/";
+    private final String RAPID_KEY = "byjx0jbnsCmshOtPa2nc7z1UqWtOp1dXVg1jsns8hO1eK3QuGn";
     private String language;
     private String mode;
     private URL url;
@@ -47,7 +54,7 @@ public class SpellCheckerOnline extends SpellChecker {
         mode = "proof";
         language = setLanguage(lang);
         String params = "?mkt=" + language + "&mode=" + mode;
-        url = new URL(HOST + PATH + params);
+        url = new URL(AZURE_HOST + AZURE_PATH + params);
         initializeKey();
         connection = (HttpsURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
@@ -85,10 +92,39 @@ public class SpellCheckerOnline extends SpellChecker {
     @Override
     public ArrayList<Word> findSynonyms(String str, Language lang) {
         Scanner stringScanner = new Scanner(str);
+        HttpResponse<JsonNode>  response = null;
+        HashMap <String, String> headers = new HashMap<>();
+        headers.put("accept",  "application/json");
+        headers.put("X-Mashape-Key", RAPID_KEY);
+        ArrayList<Word> words = new ArrayList<>();
+        int iterator = 0;
         while(stringScanner.hasNext()){
+            String wordString = stringScanner.next();
+            Word word = new Word();
+            word.setOrig(wordString);
+            word.setIndex(iterator);
+            iterator += wordString.length();
+            try{
+                response = Unirest.get(RAPID_HOST + wordString + "/synonyms").headers(headers).asJson();
+            }
+            catch (Exception ex){
+                //SpellChecker.Error(ex);
+            }
+            try {
+                json = (JSONObject) new JSONParser().parse(response.getBody().toString());
+                jsonArray = (JSONArray) json.get("synonyms");
+                for(int i = 0; i < jsonArray.size(); i++){
+                    word.addSuggestion((String) jsonArray.get(i));
+                }
 
+            }
+            catch (Exception ex){
+                SpellChecker.Error(ex);
+            }
+            iterator ++;
+            words.add(word);
         }
-        return null;
+        return words;
     }
 
     public void initializeKey() throws IOException{

@@ -19,6 +19,7 @@ public abstract class SpellChecker {
     public abstract ArrayList<Word> findSynonyms(String str, Language lang) throws Exception;
 
     public static void Error(Exception e){
+        e.printStackTrace();
         JOptionPane.showMessageDialog(null, e.toString(), "Error!", JOptionPane.ERROR_MESSAGE);
         System.exit(0);
     }
@@ -29,7 +30,7 @@ public abstract class SpellChecker {
     }
 
     public static void Warning(Exception e, String s){
-        JOptionPane.showMessageDialog(null, e.toString() + "\n" + s, "Warning!", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, e.getStackTrace().toString() + "\n" + s, "Warning!", JOptionPane.INFORMATION_MESSAGE);
     }
 
 }

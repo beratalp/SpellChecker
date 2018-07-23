@@ -136,6 +136,7 @@ public class TextFrame extends JFrame {
         buttonNewFile.addActionListener(new buttonAction());
         buttonDecreaseSize.addActionListener(new buttonAction());
         buttonIncreaseSize.addActionListener(new buttonAction());
+        buttonSave.addActionListener(new buttonAction());
         quit.addActionListener(new menuAction());
         about.addActionListener(new menuAction());
         openFile.addActionListener(new menuAction());
@@ -322,6 +323,17 @@ public class TextFrame extends JFrame {
                 else{
                     SpellChecker.Warning(new Exception(), "You can't change size any longer.");
                 }
+            } else if(e.getSource().equals(buttonSave)){
+                SpellChecker spellChecker = new SpellCheckerOnline();
+                try{
+                    words = spellChecker.findSynonyms(textArea.getText(), SpellChecker.Language.ENGLISH);
+                    for(Word word: words){
+                        System.out.println(word.getSuggestions());
+                    }
+                }
+                catch (Exception ex){
+                    SpellChecker.Error(ex);
+                }
             }
         }
     }
@@ -424,8 +436,7 @@ public class TextFrame extends JFrame {
                             new WelcomeScreen();
                         }
                     }
-                } catch ( Exception ex){
-                }
+                } catch ( Exception ex){}
             } else if ( e.getSource() == about ){
                 About about = new About();
             } else if ( e.getSource() == openFile ) {
