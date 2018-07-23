@@ -72,6 +72,7 @@ public class SpellCheckerOnline extends SpellChecker {
         for(int i = 0; i < jsonArray.size(); i++){
             Word word = new Word();
             JSONArray suggestions = (JSONArray) ((JSONObject)jsonArray.get(i)).get("suggestions");
+            word.setOrig((String) ((JSONObject)jsonArray.get(i)).get("token"));
             word.setIndex(Integer.parseInt((((JSONObject) jsonArray.get(i)).get("offset")).toString()));
             for(int j = 0; j < suggestions.size(); j++){
                 word.addSuggestion((String) ((JSONObject) suggestions.get(j)).get("suggestion"));
@@ -83,7 +84,6 @@ public class SpellCheckerOnline extends SpellChecker {
 
     @Override
     public ArrayList<Word> findSynonyms(String str, Language lang) {
-        //JSONObject synonym =
         Scanner stringScanner = new Scanner(str);
         while(stringScanner.hasNext()){
 

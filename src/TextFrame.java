@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
+
 public class TextFrame extends JFrame {
     static JTextPane textArea = new JTextPane();
     JMenuBar menuBar = new JMenuBar();
@@ -101,7 +102,6 @@ public class TextFrame extends JFrame {
         JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         getContentPane().add(scrollPane);
-        underLineWord(textArea.getText());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -276,7 +276,8 @@ public class TextFrame extends JFrame {
                 try {
                     words = spellChecker.spellCheck(textArea.getText(), SpellChecker.Language.ENGLISH);
                     for(Word word: words){
-                        underLineWord(word.getSuggestions().get(0));
+                        System.out.println(word.getOrig());
+                        underLineWord(word.getOrig(), word.getIndex());
                     }
                 } catch (Exception exception) {
                     spellChecker.Error(exception);
@@ -538,10 +539,10 @@ public class TextFrame extends JFrame {
     public static String getTextSize(){
         return ((int) textSize) + "";
     }
-    public void underLineWord(String word){
+    public void underLineWord(String word, int offset){
         SimpleAttributeSet attributeSet = new SimpleAttributeSet();
         StyleConstants.setUnderline(attributeSet, true);
-        textArea.getStyledDocument().setCharacterAttributes(0, word.length(),
+        textArea.getStyledDocument().setCharacterAttributes(offset, word.length(),
                 attributeSet, true);
     }
 }

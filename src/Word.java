@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Word {
     private int index;
     private ArrayList<String> suggestions = new ArrayList<>();
+    private String orig;
 
     public Word(){
         super();
@@ -22,5 +23,13 @@ public class Word {
 
     public ArrayList<String> getSuggestions() {
         return suggestions;
+    }
+
+    public String getOrig() {
+        return orig;
+    }
+
+    public void setOrig(String orig) {
+        this.orig = orig;
     }
 }
