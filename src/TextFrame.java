@@ -77,6 +77,7 @@ public class TextFrame extends JFrame {
 
     private static float textSize = 12;
     private static Font textFont;
+    public static String toReplace;
 
 
     public TextFrame(TextFile file) throws Exception {
@@ -566,6 +567,7 @@ public class TextFrame extends JFrame {
             }
             caretPosition++;
         }
+        toReplace = text;
         try{
             for(Word word: words){
                 if(word.getOrig().equals(text.trim())){
@@ -593,6 +595,10 @@ public class TextFrame extends JFrame {
                 SpellChecker.Error(ex);
             }
         }
+    }
+
+    public static void replaceText(String orig, String news){
+        textArea.setText(textArea.getText().replaceFirst(orig, news));
     }
 
 }

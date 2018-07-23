@@ -74,8 +74,16 @@ public class RightClickMenu extends JPopupMenu {
         }
     }
 
+    public class SuggestionAction implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            TextFrame.replaceText(TextFrame.toReplace, ((JMenuItem)e.getSource()).getText());
+        }
+    }
+
     public void addSuggestion(String suggestion){
         JMenuItem suggestionItem = new JMenuItem(suggestion);
+        suggestionItem.addActionListener(new SuggestionAction());
         add(suggestionItem);
     }
 }
