@@ -31,4 +31,5 @@ public abstract class SpellChecker {
     public static void Warning(Exception e, String s){
         JOptionPane.showMessageDialog(null, e.toString() + "\n" + s, "Warning!", JOptionPane.INFORMATION_MESSAGE);
     }
+
 }

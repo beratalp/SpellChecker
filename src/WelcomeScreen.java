@@ -1,3 +1,5 @@
+import javafx.application.Application;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -38,6 +40,16 @@ public class WelcomeScreen {
             recents[i] = recentsArray.get(i);
         }
         BufferedImage logo = ImageIO.read(new File("logo.png"));
+        frame.setIconImage(logo);
+        System.out.println(System.getProperty("os.name"));
+        if(System.getProperty("os.name").startsWith("Mac")){
+            try {
+                com.apple.eawt.Application.getApplication().setDockIconImage(logo);
+            }
+            catch (Exception ex){
+                SpellChecker.Error(ex);
+            }
+        }
         JList<String> recentList = new JList<String>(recents);
         recentList.addMouseListener(new MouseListener() {
             @Override
