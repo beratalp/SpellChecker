@@ -71,7 +71,7 @@ public class TextFrame extends JFrame {
     JButton buttonAutoCorrect = new JButton();
     JButton buttonIncreaseSize = new JButton();
     JButton buttonDecreaseSize = new JButton();
-    JLabel label = new JLabel("Word Count");
+    JLabel label = new JLabel("Ready.");
     RightClickMenu rightClickMenu;
 
     private TextFile file;
@@ -290,6 +290,7 @@ public class TextFrame extends JFrame {
                     spellChecker = new SpellCheckerOffline();
                 try {
                     words = spellChecker.spellCheck(textArea.getText(), SpellChecker.Language.ENGLISH);
+                    label.setText("Finding synonyms...");
                     synonyms = spellChecker.findSynonyms(textArea.getText(), SpellChecker.Language.ENGLISH);
                     for(Word word: words){
                         System.out.println(word.getOrig());
@@ -301,6 +302,7 @@ public class TextFrame extends JFrame {
                 } catch (Exception exception) {
                     spellChecker.Error(exception);
                 }
+                label.setText("Word Count: " + words.size() + "\t" + "Misspelled Words: " + (words.size() - synonyms.size()));
             } else if ( e.getSource().equals(buttonOpenFile) ){
                 JFileChooser fc = new JFileChooser();
                 int returnVal = fc.showOpenDialog(null);
@@ -530,7 +532,12 @@ public class TextFrame extends JFrame {
     public static void underLineWord(String word, int offset){
         SimpleAttributeSet attributeSet = new SimpleAttributeSet();
         StyleConstants.setUnderline(attributeSet, true);
-        textArea.getStyledDocument().setCharacterAttributes(offset, word.length(),
+        String[] strings = textArea.getText().split(" ");
+        int length = word.length();
+        if(word.equals(strings[strings.length - 1])){
+            length = length - 1;
+        }
+        textArea.getStyledDocument().setCharacterAttributes(offset, length,
                 attributeSet, true);
     }
 
@@ -570,7 +577,6 @@ public class TextFrame extends JFrame {
             c = textArea.getText(caretPosition, 1).charAt(0);
         }
         catch (Exception ex){
-            SpellChecker.Error(ex);
         }
         while(c != ' ') {
             try {
@@ -584,12 +590,25 @@ public class TextFrame extends JFrame {
             }
             caretPosition++;
         }
+        char[] chars = text.toCharArray();
+        Character punctuation = null;
+        String punctutations = ".,:;";
+        for(char ch: chars){
+            for(char c2: punctutations.toCharArray()){
+                if(c2 == ch){
+                    punctuation = c2;
+                }
+            }
+        }
         toReplace = text;
         try{
             for(Word word: words){
-                if(word.getOrig().equals(text.trim())){
+                if(word.getOrig().equals(text.trim().replace(".", ""))){
                     for(String suggestion: word.getSuggestions()){
-                        rightClickMenu.addSuggestion(suggestion);
+                        if(punctuation != null)
+                            rightClickMenu.addSuggestion(suggestion + punctuation);
+                        else
+                            rightClickMenu.addSuggestion(suggestion);
                     }
                 }
             }
