@@ -10,9 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 
@@ -410,23 +408,7 @@ public class TextFrame extends JFrame {
                             }
                         }
                         else if(n == 2){
-                            JFileChooser fileChooser = new JFileChooser();
-                            int returnValue = fileChooser.showSaveDialog(saveFile);
-                            if (returnValue == JFileChooser.APPROVE_OPTION) {
-                                File file = fileChooser.getSelectedFile();
-                                if (file == null) {
-                                    return;
-                                }
-                                if (!file.getName().toLowerCase().endsWith(".txt")) {
-                                    file = new File(file.getParentFile(), file.getName() + ".txt");
-                                }
-                                try {
-                                    textArea.write(new OutputStreamWriter(new FileOutputStream(file),
-                                            "utf-8"));
-                                } catch (Exception ex) {
-                                    SpellChecker.Error(ex);
-                                }
-                            }
+                            saveAsAction();
                             setVisible(false);
                             dispose();
                             new WelcomeScreen();
@@ -450,20 +432,7 @@ public class TextFrame extends JFrame {
                     }
                 }
             } else if ( e.getSource() == saveAsFile ){
-                JFileChooser fileChooser = new JFileChooser();
-                int returnValue = fileChooser.showSaveDialog(saveFile);
-                if (returnValue == JFileChooser.APPROVE_OPTION) {
-                    File newFile = fileChooser.getSelectedFile();
-                    if (newFile == null) {
-                        return;
-                    }
-                    try{
-                        file.saveFile(newFile, textArea.getText());
-                    }
-                    catch (Exception ex){
-                        SpellChecker.Error(ex);
-                    }
-                }
+                saveAsAction();
             } else if ( e.getSource() == newFile ){
                 try{
                     TextFile file = new TextFile();
@@ -607,6 +576,22 @@ public class TextFrame extends JFrame {
             }
         }
         catch (Exception ex){
+        }
+    }
+    public void saveAsAction(){
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showSaveDialog(saveFile);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File newFile = fileChooser.getSelectedFile();
+            if (newFile == null) {
+                return;
+            }
+            try{
+                file.saveFile(newFile, textArea.getText());
+            }
+            catch (Exception ex){
+                SpellChecker.Error(ex);
+            }
         }
     }
 
