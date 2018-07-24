@@ -64,6 +64,7 @@ public class TextFrame extends JFrame {
     private JCheckBoxMenuItem englishMode = new JCheckBoxMenuItem("English");
     private JCheckBoxMenuItem turkishMode = new JCheckBoxMenuItem( "Turkish" );
     SpellChecker spellChecker;
+    private SpellChecker.Language lang = SpellChecker.Language.ENGLISH;
 
     private JPanel panel = new JPanel();
     private JPanel panelCenter = new JPanel();
@@ -321,9 +322,9 @@ public class TextFrame extends JFrame {
                 else
                     spellChecker = new SpellCheckerOffline();
                 try {
-                    words = spellChecker.spellCheck(textArea.getText(), SpellChecker.Language.ENGLISH);
+                    words = spellChecker.spellCheck(textArea.getText(), lang);
                     label.setText("Finding synonyms...");
-                    synonyms = spellChecker.findSynonyms(textArea.getText(), SpellChecker.Language.ENGLISH);
+                    synonyms = spellChecker.findSynonyms(textArea.getText(), lang);
                     for(Word word: words){
                         if(word.isWrong())
                             underLineWord(word.getOrig(), word.getIndex());
@@ -339,7 +340,7 @@ public class TextFrame extends JFrame {
                     spellChecker.Error(exception);
                 }
                 try{
-                    label.setText("Word Count: " + words.size() + "\t" + "Misspelled Words: " + (words.size() - synonyms.size()));
+                    label.setText("Word Count: " + synonyms.size() + "\t" + "Misspelled Words: " + (words.size() - synonyms.size()));
                 }
                 catch(Exception ex){
                     label.setText("Word Count: " + words.size());
@@ -515,9 +516,11 @@ public class TextFrame extends JFrame {
                 }
             } else if ( e.getSource() == englishMode ){
                     turkishMode.setState(false);
+                    lang = SpellChecker.Language.ENGLISH;
             }
             else if ( e.getSource() == turkishMode){
                     englishMode.setState(false);
+                    lang = SpellChecker.Language.TURKISH;
             } else if (e.getSource() == onlineMode){
                 if ( onlineMode.isSelected() == false )
                 SpellChecker.isOnline = false;

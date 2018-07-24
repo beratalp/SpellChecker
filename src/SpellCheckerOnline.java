@@ -53,6 +53,7 @@ public class SpellCheckerOnline extends SpellChecker {
         mode = "proof";
         language = setLanguage(lang);
         String params = "?mkt=" + language + "&mode=" + mode;
+        System.out.println(params);
         url = new URL(AZURE_HOST + AZURE_PATH + params);
         initializeKey();
         connection = (HttpsURLConnection) url.openConnection();
@@ -129,7 +130,6 @@ public class SpellCheckerOnline extends SpellChecker {
     public void initializeKey() throws IOException{
         key = new Key(keyfile);
         keyString = key.getKeyString();
-        System.out.println(keyString);
     }
 
     private String setLanguage(Language lang){
@@ -137,7 +137,7 @@ public class SpellCheckerOnline extends SpellChecker {
             return "en-us";
         }
         else{
-            return "tr-TR";
+            return "en-us";
         }
     }
 
