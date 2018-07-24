@@ -384,8 +384,17 @@ public class TextFrame extends JFrame {
                     SpellChecker.Warning(new Exception(), "You can't change size any longer.");
                 }
             } else if(e.getSource().equals(buttonSave)) {
-                if (file.getShortPath().equals("untitled.txt") ){
-                    saveAsAction();
+                if (getTitle().equals("untitled.txt") ){
+                    String fileString = saveAsAction();
+                    setTitle(fileString);
+                }
+                else{
+                    try{
+                        file.saveFile(new File(file.getPath()), textArea.getText());
+                    }
+                    catch (Exception ex){
+                        SpellChecker.Error(ex);
+                    }
                 }
             }
         }
@@ -491,7 +500,8 @@ public class TextFrame extends JFrame {
                     }
                 }
             } else if ( e.getSource() == saveAsFile ){
-                saveAsAction();
+                String fileString = saveAsAction();
+                setTitle(fileString);
             } else if ( e.getSource() == newFile ){
                 try{
                     TextFile file = new TextFile();
@@ -694,13 +704,13 @@ public class TextFrame extends JFrame {
         catch (Exception ex){
         }
     }
-    public void saveAsAction(){
+    public String saveAsAction(){
         JFileChooser fileChooser = new JFileChooser();
         int returnValue = fileChooser.showSaveDialog(saveFile);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File newFile = fileChooser.getSelectedFile();
             if (newFile == null) {
-                return;
+                return null;
             }
             try{
                 file.saveFile(newFile, textArea.getText());
@@ -708,6 +718,14 @@ public class TextFrame extends JFrame {
             catch (Exception ex){
                 SpellChecker.Error(ex);
             }
+        }
+
+        try{
+            return fileChooser.getSelectedFile().getName();
+        }
+        catch (Exception ex){
+            SpellChecker.Error(ex);
+            return null;
         }
     }
 
