@@ -6,10 +6,7 @@ import javax.swing.text.Document;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -117,7 +114,8 @@ public class TextFrame extends JFrame {
         JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         getContentPane().add(scrollPane);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        addWindowListener(new ExitListener());
         setLocationRelativeTo(null);
         setVisible(true);
     }
@@ -451,40 +449,7 @@ public class TextFrame extends JFrame {
             }else if( e.getSource() == typefaceItem){
                 SetFontDialog dialog = new SetFontDialog();
             }else if (e.getSource().equals(quit)){
-                try {
-                    if ( file.isEqual(textArea.getText())){
-                        setVisible(false);
-                        dispose();
-                        WelcomeScreen screen = new WelcomeScreen();
-                    } else{
-                        Object[] options = {"Close",
-                                "Cancel", "Save"};
-                        int n = JOptionPane.showOptionDialog(
-                                null,"Save Changes to document \"" + file.getShortPath()+ "\" before closing it ? " ,
-                                "UnSaved Changes",
-                                JOptionPane.YES_NO_OPTION,
-                                JOptionPane.QUESTION_MESSAGE,
-                                null,
-                                options,
-                                options[0]);
-                        if(n == 0){
-                            setVisible(false);
-                            dispose();
-                            try{
-                                new WelcomeScreen();
-                            }
-                            catch (Exception ex){
-                                SpellChecker.Error(ex);
-                            }
-                        }
-                        else if(n == 2){
-                            saveAsAction();
-                            setVisible(false);
-                            dispose();
-                            new WelcomeScreen();
-                        }
-                    }
-                } catch ( Exception ex){}
+                closeAction(true);
             } else if ( e.getSource() == about ){
                 About about = new About();
             } else if ( e.getSource() == openFile ) {
@@ -783,6 +748,64 @@ public class TextFrame extends JFrame {
                     underLineWord(word.getOrig(), index);
             }
         }
+    }
+
+    public class ExitListener extends WindowAdapter{
+        @Override
+        public void windowClosing(WindowEvent e) {
+            if(textArea.getText().length() > 0){
+                closeAction(false);
+            }
+            else{
+                System.exit(0);
+            }
+        }
+    }
+
+    public void closeAction(boolean openWelcome){
+        try {
+            if ( file.isEqual(textArea.getText())){
+                setVisible(false);
+                dispose();
+                if(openWelcome)
+                    new WelcomeScreen();
+                else
+                    System.exit(0);
+            } else{
+                Object[] options = {"Close",
+                        "Cancel", "Save"};
+                int n = JOptionPane.showOptionDialog(
+                        null,"Save Changes to document \"" + file.getShortPath()+ "\" before closing it ? " ,
+                        "Unsaved Changes",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[0]);
+                if(n == 0){
+                    setVisible(false);
+                    dispose();
+                    try{
+                        if(openWelcome)
+                            new WelcomeScreen();
+                        else
+                            System.exit(0);
+                    }
+                    catch (Exception ex){
+                        SpellChecker.Error(ex);
+                    }
+                }
+                else if(n == 2){
+                    saveAsAction();
+                    setVisible(false);
+                    dispose();
+                    if(openWelcome)
+                        new WelcomeScreen();
+                    else
+                        System.exit(0);
+                }
+            }
+        } catch ( Exception ex){}
     }
 }
 

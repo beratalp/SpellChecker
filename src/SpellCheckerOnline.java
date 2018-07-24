@@ -21,7 +21,7 @@ public class SpellCheckerOnline extends SpellChecker {
     private final String RAPID_HOST = "https://wordsapiv1.p.mashape.com/words/";
     private final String RAPID_KEY = "byjx0jbnsCmshOtPa2nc7z1UqWtOp1dXVg1jsns8hO1eK3QuGn";
     private String language;
-    private String mode;
+    private String mode = "Proof";
     private URL url;
     private HttpsURLConnection connection;
     private ArrayList<Word> wordList;
@@ -50,10 +50,8 @@ public class SpellCheckerOnline extends SpellChecker {
     @Override
     public ArrayList<Word> spellCheck(String str, Language lang) throws Exception{
         wordList = new ArrayList<Word>();
-        mode = "proof";
         language = setLanguage(lang);
         String params = "?mkt=" + language + "&mode=" + mode;
-        System.out.println(params);
         url = new URL(AZURE_HOST + AZURE_PATH + params);
         initializeKey();
         connection = (HttpsURLConnection) url.openConnection();
@@ -74,6 +72,7 @@ public class SpellCheckerOnline extends SpellChecker {
             jsonLine += line;
         }
         in.close();
+        System.out.println(jsonLine);
         json = (JSONObject) new JSONParser().parse(jsonLine);
         jsonArray = (JSONArray) (json.get("flaggedTokens"));
         for(int i = 0; i < jsonArray.size(); i++){
@@ -134,10 +133,13 @@ public class SpellCheckerOnline extends SpellChecker {
 
     private String setLanguage(Language lang){
         if(lang == Language.ENGLISH){
+            mode = "proof";
             return "en-us";
         }
         else{
-            return "en-us";
+            mode = "spell";
+            return "tr";
+
         }
     }
 
