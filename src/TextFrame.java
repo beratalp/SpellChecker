@@ -13,7 +13,6 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 /**
  * This class is for
  * @author 404 Not Found
@@ -164,6 +163,7 @@ public class TextFrame extends JFrame {
         turkishMode.addActionListener(new menuAction());
         buttonSave.addActionListener(new buttonAction());
         onlineMode.addActionListener(new menuAction());
+        saveFile.addActionListener(new menuAction());
     }
 
     /**
@@ -521,6 +521,19 @@ public class TextFrame extends JFrame {
             } else if (e.getSource() == onlineMode){
                 if ( onlineMode.isSelected() == false )
                 SpellChecker.isOnline = false;
+            } else if ( e.getSource() == saveFile ){
+                if (getTitle().equals("untitled.txt") ){
+                    String fileString = saveAsAction();
+                    setTitle(fileString);
+                }
+                else{
+                    try{
+                        file.saveFile(new File(file.getPath()), textArea.getText());
+                    }
+                    catch (Exception ex){
+                        SpellChecker.Error(ex);
+                    }
+                }
             }
         }
     }
