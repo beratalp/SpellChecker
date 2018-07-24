@@ -163,6 +163,7 @@ public class TextFrame extends JFrame {
         englishMode.addActionListener(new menuAction());
         turkishMode.addActionListener(new menuAction());
         buttonSave.addActionListener(new buttonAction());
+        onlineMode.addActionListener(new menuAction());
     }
 
     /**
@@ -507,6 +508,9 @@ public class TextFrame extends JFrame {
             }
             else if ( e.getSource() == turkishMode){
                     englishMode.setState(false);
+            } else if (e.getSource() == onlineMode){
+                if ( onlineMode.isSelected() == false )
+                SpellChecker.isOnline = false;
             }
         }
     }
