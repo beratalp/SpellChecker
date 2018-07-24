@@ -13,9 +13,12 @@ import java.util.ArrayList;
 /**
  * This class is for defining a TextFrame object that extends JFrame. This class defines all the GUI methods and elements that are used by itself.
  * @author 404 Not Found
- * @version 24.07.2018
+ * @version 0.2
  */
 
+/**
+ * Constructs TextFrame by creating ,setting and initializing all the components and adding some components to necessary addActionListener.
+ */
 public class TextFrame extends JFrame {
     //declarations
     static JTextPane textArea = new JTextPane();

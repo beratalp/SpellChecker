@@ -1,16 +1,21 @@
-import java.io.*;
-import java.util.ArrayList;
-import java.net.*;
-import java.util.HashMap;
-import java.util.Scanner;
-import javax.net.ssl.HttpsURLConnection;
-import org.json.simple.*;
-import org.json.simple.parser.*;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
+import javax.net.ssl.HttpsURLConnection;
+import java.io.*;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
 
+/**
+ * @author 404 Not Found
+ * @version 0.2
+ */
 public class SpellCheckerOnline extends SpellChecker {
 
     private File keyfile = new File("keys.txt");

@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
+ *This class is for creating the right click menu for text area.
  * @author 404 Not Found
  * @version 24.07.2018
  */
@@ -17,9 +18,8 @@ public class RightClickMenu extends JPopupMenu {
     private JMenuItem paste;
 
     //Constructor
-
     /**
-     *
+     * Constructs RightClickMenu by adding  and setting the components and adding the right action to the components.
      */
     public RightClickMenu(){
         setComponents();
@@ -55,6 +55,9 @@ public class RightClickMenu extends JPopupMenu {
         cut.addActionListener(new CutAction());
     }
 
+    /**
+     * This class for implementing copy action to the right click menu.
+     */
     public class CopyAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -65,6 +68,9 @@ public class RightClickMenu extends JPopupMenu {
         }
     }
 
+    /**
+     * This class for implementing paste action to the right click menu.
+     */
     public class PasteAction implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -77,6 +83,10 @@ public class RightClickMenu extends JPopupMenu {
             }
         }
     }
+
+    /**
+     * This class for implementing cut action to the right click menu.
+     */
     public class CutAction implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -93,6 +103,9 @@ public class RightClickMenu extends JPopupMenu {
         }
     }
 
+    /**
+     * This class is for creating an ActionListener for suggestion action.
+     */
     public class SuggestionAction implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {

@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 /**
+ * This class is for handling all words in a certain String.
  * @author 404 Not Found
  * @verison 24.07.2018
  */
@@ -11,6 +12,9 @@ public class Word {
     private String orig;
     private boolean isWrong = false;
 
+    /**
+     * Constructors the Word class.
+     */
     public Word(){
         super();
     }

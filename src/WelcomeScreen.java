@@ -10,8 +10,9 @@ import java.io.File;
 import java.io.IOException;
 
 /**
+ * This program is for demonstrating the text frame and its functionality
  * @author 404 Not Found
- * @version 24.07.2018
+ * @version 0.2
  */
 public class WelcomeScreen {
 
