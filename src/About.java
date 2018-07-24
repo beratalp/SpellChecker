@@ -18,8 +18,10 @@ public class About extends JFrame {
     private JLabel mailSalman = new JLabel("Salman Soomro - salmanakhtar2@gmail.com ");
     private JLabel mailHassam = new JLabel("Hassam Abdullah - hassamabdullah1@gmail.com");
     private JLabel mailUmer = new JLabel("Umer Shamaan - shamaan0086@gmail.com");
+    private JLabel licence = new JLabel( "<html><p>Icons form LibreOffice Project <br/> Apache HTTP Libraries from Apache Foundation <br/> Simple JSON Library by Yidong Fang <br/> unirest HTTP Request Libraries by Mashape </p></html>" );
     public About(){
         panel1.setLayout( new FlowLayout( FlowLayout.LEFT,0,10) ) ;
+        panel2.setLayout(new BorderLayout());
         panel1.add(mailAlp);
         panel1.add(mailBeril );
         panel1.add(mailSalman);
@@ -29,6 +31,7 @@ public class About extends JFrame {
         label.setForeground(Color.white);
         panelTop.setBackground(Color.decode("#455A64"));
         panelTop.setLayout(new BorderLayout() );
+        panel2.add(licence, BorderLayout.CENTER);
         setBackground(Color.decode("#455A64"));
         setForeground(Color.decode("#455A64"));
         try {
