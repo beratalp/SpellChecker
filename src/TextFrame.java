@@ -163,6 +163,7 @@ public class TextFrame extends JFrame {
         buttonSave.addActionListener(new buttonAction());
         onlineMode.addActionListener(new menuAction());
         saveFile.addActionListener(new menuAction());
+        buttonAutoCorrect.addActionListener(new buttonAction());
     }
 
     /**
@@ -396,6 +397,8 @@ public class TextFrame extends JFrame {
                         SpellChecker.Error(ex);
                     }
                 }
+            } else if(e.getSource().equals(buttonAutoCorrect)){
+                autoCorrect();
             }
         }
     }
@@ -709,7 +712,6 @@ public class TextFrame extends JFrame {
             return fileChooser.getSelectedFile().getName();
         }
         catch (Exception ex){
-            SpellChecker.Error(ex);
             return null;
         }
     }
@@ -796,16 +798,29 @@ public class TextFrame extends JFrame {
                     }
                 }
                 else if(n == 2){
-                    saveAsAction();
-                    setVisible(false);
-                    dispose();
-                    if(openWelcome)
+                    String fileString = saveAsAction();
+                    if(openWelcome){
+                        setVisible(false);
+                        dispose();
                         new WelcomeScreen();
+                    }
+                    if(fileString == null) {
+                        return;
+                    }
                     else
                         System.exit(0);
                 }
             }
         } catch ( Exception ex){}
+    }
+
+    public void autoCorrect(){
+        for(Word word: words){
+            System.out.println(word.getOrig());
+            if(word.isWrong()){
+                replaceText(word.getOrig(), word.getSuggestions().get(0));
+            }
+        }
     }
 }
 

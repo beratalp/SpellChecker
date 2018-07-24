@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public abstract class SpellChecker {
-    public final static String VERSION = "0.1";
+    public final static String VERSION = "0.2";
     public final static String APP_NAME = "Spell Inspector";
     public static boolean isOnline = true;
 
