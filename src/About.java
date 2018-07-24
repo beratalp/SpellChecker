@@ -15,7 +15,7 @@ public class About extends JFrame {
     private JPanel panel1 = new JPanel();
     private JLabel mailAlp = new JLabel("Berat Alp Erbil - beratalp@gmail.com");
     private JLabel mailBeril = new JLabel("Beril Bayram - berilbayram@gmail.com");
-    private JLabel mailSalman = new JLabel("Salman Soomro - salmanakhtar@gmail.com ");
+    private JLabel mailSalman = new JLabel("Salman Soomro - salmanakhtar2@gmail.com ");
     private JLabel mailHassam = new JLabel("Hassam Abdullah - hassamabdullah1@gmail.com");
     private JLabel mailUmer = new JLabel("Umer Shamaan - shamaan0086@gmail.com");
     public About(){
@@ -49,6 +49,10 @@ public class About extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
+
+    /**
+     * This method is for adding the mouseListeners for the mail addresses
+     */
     private void addMouseListeners(){
         mailAlp.addMouseListener( new mouseEvent());
         mailBeril.addMouseListener( new mouseEvent());

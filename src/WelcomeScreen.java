@@ -8,11 +8,14 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
+/**
+ * @author 404 Not Found
+ * @version 24.07.2018
+ */
 public class WelcomeScreen {
 
+    //constructor
     public WelcomeScreen() throws Exception{
         main(null);
     }

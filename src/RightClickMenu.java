@@ -6,17 +6,30 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * @author 404 Not Found
+ * @version 24.07.2018
+ */
+
 public class RightClickMenu extends JPopupMenu {
     private JMenuItem copy;
     private JMenuItem cut;
     private JMenuItem paste;
 
+    //Constructor
+
+    /**
+     *
+     */
     public RightClickMenu(){
         setComponents();
         addComponents();
         addActionListeners();
     }
 
+    /**
+     * this method is for adding components to the right click menu
+     */
     public void addComponents() {
         add(copy);
         add(cut);
@@ -24,12 +37,18 @@ public class RightClickMenu extends JPopupMenu {
         add(new JSeparator());
     }
 
+    /**
+     * This method is for setting components name
+     */
     public void setComponents(){
         copy = new JMenuItem("Copy");
         cut = new JMenuItem("Cut");
         paste = new JMenuItem("Paste");
     }
 
+    /**
+     * This method is for adding actionListeners to menuItems
+     */
     public void addActionListeners(){
         copy.addActionListener(new CopyAction());
         paste.addActionListener(new PasteAction());
@@ -81,6 +100,10 @@ public class RightClickMenu extends JPopupMenu {
         }
     }
 
+    /**
+     * This method is for adding suggestion to the suggestion part of the right click menu.
+     * @param suggestion recommended suggestion of the selected word.
+     */
     public void addSuggestion(String suggestion){
         JMenuItem suggestionItem = new JMenuItem(suggestion);
         suggestionItem.addActionListener(new SuggestionAction());

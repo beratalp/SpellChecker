@@ -14,64 +14,69 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * This class is for
+ * @author 404 Not Found
+ * @version 24.07.2018
+ */
 
 public class TextFrame extends JFrame {
     static JTextPane textArea = new JTextPane();
-    JMenuBar menuBar = new JMenuBar();
-    JMenu fileMenu = new JMenu("File");
-    JMenu editMenu = new JMenu("Edit");
-    JMenu settingsMenu = new JMenu("Settings");
-    JMenu helpMenu = new JMenu("Help   ");
-    JMenu textMenu = new JMenu("Text");
-    JMenu backgroundMenu = new JMenu("Background");
-    JMenu backgroundColorMenu = new JMenu("Color");
-    JMenu textColorMenu = new JMenu("Color");
-    JMenu languageMenu = new JMenu("Language");
-    JMenuItem sizeItem = new JMenuItem("Size");
-    JMenuItem typefaceItem = new JMenuItem("Typeface");
-    JMenuItem blackBackground = new JMenuItem("Black");
-    JMenuItem redBackground = new JMenuItem("Red");
-    JMenuItem greyBackground = new JMenuItem("Grey");
-    JMenuItem blueBackground = new JMenuItem("Blue");
-    JMenuItem darkBlueBackground = new JMenuItem("Dark Blue");
-    JMenuItem whiteBackground = new JMenuItem("White");
-    JMenuItem orangeBackground = new JMenuItem("Orange");
-    JMenuItem greenBackground = new JMenuItem("Green");
-    JMenuItem purpleBackground = new JMenuItem("Purple");
-    JMenuItem pinkBackground = new JMenuItem("Pink");
-    JMenuItem blackText = new JMenuItem("Black");
-    JMenuItem redText = new JMenuItem("Red");
-    JMenuItem greyText = new JMenuItem("Grey");
-    JMenuItem blueText = new JMenuItem("Blue");
-    JMenuItem darkBlueText = new JMenuItem("Dark Blue");
-    JMenuItem whiteText = new JMenuItem("White");
-    JMenuItem orangeText = new JMenuItem("Orange");
-    JMenuItem greenText = new JMenuItem("Green");
-    JMenuItem purpleText = new JMenuItem("Purple");
-    JMenuItem pinkText = new JMenuItem("Pink");
-    JMenuItem newFile = new JMenuItem("New");
-    JMenuItem openFile = new JMenuItem("Open");
-    JMenuItem saveFile = new JMenuItem("Save");
-    JMenuItem saveAsFile = new JMenuItem("Save As");
-    JMenuItem quit = new JMenuItem("Quit");
-    JMenuItem about = new JMenuItem("About");
-    JMenuItem forum = new JMenuItem("Forum");
-    JCheckBoxMenuItem onlineMode = new JCheckBoxMenuItem("Online Mode");
-    JCheckBoxMenuItem englishMode = new JCheckBoxMenuItem("English");
-    JCheckBoxMenuItem turkishMode = new JCheckBoxMenuItem( "Turkish" );
+    private JMenuBar menuBar = new JMenuBar();
+    private JMenu fileMenu = new JMenu("File");
+    private JMenu editMenu = new JMenu("Edit");
+    private JMenu settingsMenu = new JMenu("Settings");
+    private JMenu helpMenu = new JMenu("Help   ");
+    private JMenu textMenu = new JMenu("Text");
+    private JMenu backgroundMenu = new JMenu("Background");
+    private JMenu backgroundColorMenu = new JMenu("Color");
+    private JMenu textColorMenu = new JMenu("Color");
+    private JMenu languageMenu = new JMenu("Language");
+    private JMenuItem sizeItem = new JMenuItem("Size");
+    private JMenuItem typefaceItem = new JMenuItem("Typeface");
+    private JMenuItem blackBackground = new JMenuItem("Black");
+    private JMenuItem redBackground = new JMenuItem("Red");
+    private JMenuItem greyBackground = new JMenuItem("Grey");
+    private JMenuItem blueBackground = new JMenuItem("Blue");
+    private JMenuItem darkBlueBackground = new JMenuItem("Dark Blue");
+    private JMenuItem whiteBackground = new JMenuItem("White");
+    private JMenuItem orangeBackground = new JMenuItem("Orange");
+    private JMenuItem greenBackground = new JMenuItem("Green");
+    private JMenuItem purpleBackground = new JMenuItem("Purple");
+    private JMenuItem pinkBackground = new JMenuItem("Pink");
+    private JMenuItem blackText = new JMenuItem("Black");
+    private JMenuItem redText = new JMenuItem("Red");
+    private JMenuItem greyText = new JMenuItem("Grey");
+    private JMenuItem blueText = new JMenuItem("Blue");
+    private JMenuItem darkBlueText = new JMenuItem("Dark Blue");
+    private JMenuItem whiteText = new JMenuItem("White");
+    private JMenuItem orangeText = new JMenuItem("Orange");
+    private JMenuItem greenText = new JMenuItem("Green");
+    private JMenuItem purpleText = new JMenuItem("Purple");
+    private JMenuItem pinkText = new JMenuItem("Pink");
+    private JMenuItem newFile = new JMenuItem("New");
+    private JMenuItem openFile = new JMenuItem("Open");
+    private JMenuItem saveFile = new JMenuItem("Save");
+    private JMenuItem saveAsFile = new JMenuItem("Save As");
+    private JMenuItem quit = new JMenuItem("Quit");
+    private JMenuItem about = new JMenuItem("About");
+    private JMenuItem forum = new JMenuItem("Forum");
+    private JCheckBoxMenuItem onlineMode = new JCheckBoxMenuItem("Online Mode");
+    private JCheckBoxMenuItem englishMode = new JCheckBoxMenuItem("English");
+    private JCheckBoxMenuItem turkishMode = new JCheckBoxMenuItem( "Turkish" );
     SpellChecker spellChecker;
 
-    JPanel panel = new JPanel();
-    JPanel panelCenter = new JPanel();
-    JPanel panelLow = new JPanel();
-    JButton buttonSave = new JButton();
-    JButton buttonOpenFile = new JButton();
-    JButton buttonNewFile = new JButton();
-    JButton buttonSpellCheck = new JButton();
-    JButton buttonAutoCorrect = new JButton();
-    JButton buttonIncreaseSize = new JButton();
-    JButton buttonDecreaseSize = new JButton();
-    JLabel label = new JLabel("Ready.");
+    private JPanel panel = new JPanel();
+    private JPanel panelCenter = new JPanel();
+    private JPanel panelLow = new JPanel();
+    private JButton buttonSave = new JButton();
+    private JButton buttonOpenFile = new JButton();
+    private JButton buttonNewFile = new JButton();
+    private JButton buttonSpellCheck = new JButton();
+    private JButton buttonAutoCorrect = new JButton();
+    private JButton buttonIncreaseSize = new JButton();
+    private JButton buttonDecreaseSize = new JButton();
+    private JLabel label = new JLabel("Ready.");
     RightClickMenu rightClickMenu;
 
     private TextFile file;
@@ -112,12 +117,14 @@ public class TextFrame extends JFrame {
         JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         getContentPane().add(scrollPane);
-        System.out.println(englishMode.isSelected());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
+    /**
+     * This method is for adding actionListeners to all the components
+     */
     public void addActionListeners() {
         blackBackground.addActionListener(new menuAction());
         redBackground.addActionListener(new menuAction());
@@ -155,13 +162,22 @@ public class TextFrame extends JFrame {
         newFile.addActionListener(new menuAction());
         englishMode.addActionListener(new menuAction());
         turkishMode.addActionListener(new menuAction());
+        buttonSave.addActionListener(new buttonAction());
     }
+
+    /**
+     * This method is for adding the status bar
+     */
     public void addStatusBar(){
         panelLow.setLayout(new BoxLayout(panelLow, BoxLayout.X_AXIS));
         panelLow.setBorder(new BevelBorder(BevelBorder.LOWERED));
         label.setHorizontalAlignment(SwingConstants.LEFT);
         panelLow.add(label);
     }
+
+    /**
+     * This method is for adding the components on the frame.
+     */
 
     public void addComponentsButtons() {
         panel.add(buttonNewFile);
@@ -230,6 +246,9 @@ public class TextFrame extends JFrame {
         }
     }
 
+    /**
+     * This method is for adding the all components on the menu bar
+     */
     public void addComponentsMenu() {
         menuBar.add(fileMenu);
         menuBar.add(editMenu);
@@ -241,6 +260,9 @@ public class TextFrame extends JFrame {
         backgroundMenu.add(backgroundColorMenu);
     }
 
+    /**
+     * This method is for adding the menu items on the menus
+     */
     public void addComponentsMenuItems() {
         textMenu.add(sizeItem);
         textMenu.add(typefaceItem);
@@ -280,7 +302,11 @@ public class TextFrame extends JFrame {
         helpMenu.add(about);
     }
 
-
+    /**
+     * This method is for initialize the text field
+     * @param file the recent file that the user want to work on
+     * @throws IOException in case the file does not exist
+     */
     public void initializeTextField(TextFile file) throws IOException {
         textArea.setText(file.getText());
     }
@@ -349,6 +375,9 @@ public class TextFrame extends JFrame {
                     SpellChecker.Warning(new Exception(), "You can't change size any longer.");
                 }
             } else if(e.getSource().equals(buttonSave)) {
+                if (file.getShortPath().equals("untitled.txt") ){
+                    saveAsAction();
+                }
             }
         }
     }
@@ -468,7 +497,6 @@ public class TextFrame extends JFrame {
                     turkishMode.setState(false);
             }
             else if ( e.getSource() == turkishMode){
-                System.out.println("Fuck");
                     englishMode.setState(false);
             }
         }
@@ -507,7 +535,10 @@ public class TextFrame extends JFrame {
         return textArea.getSelectedText();
     }
 
-
+    /**
+     * This method is for pasting the text.
+     * @param text the selected text that wanted to paste in JPaneEditor.
+     */
     public static void pasteText(String text){
         int location = textArea.getCaretPosition();
         Document doc = textArea.getDocument();
@@ -518,6 +549,10 @@ public class TextFrame extends JFrame {
         }
     }
 
+    /**
+     * This method is for cutting the text that have been selected.
+     * @param selection the String tht wanted to cut.
+     */
     public static void cutText(String selection){
         try {
             if(selection == null){
@@ -528,18 +563,36 @@ public class TextFrame extends JFrame {
             }
     }
 
+    /**
+     * This method is for setting the text font according to giving the font type.
+     * @param font Font that wanted to set.
+     */
     public static void setTextFont(Font font){
         textArea.setFont(font.deriveFont(textSize));
     }
 
+    /**
+     * This method is for setting the text size according to giving size number.
+     * @param size size number that wanted to set the size.
+     */
     public static void setTextSize(int size){
         textSize = size;
         textArea.setFont(textArea.getFont().deriveFont(textSize));
     }
+
+    /**
+     * This method is for etting the current text size.
+     * @return String representation of the current text size.
+     */
     public static String getTextSize(){
         return ((int) textSize) + "";
     }
 
+    /**
+     * This method is for underlining misspelled word that had been entered the textArea after spellchecking.
+     * @param word word that misspelled
+     * @param offset ??
+     */
     public static void underLineWord(String word, int offset){
         SimpleAttributeSet attributeSet = new SimpleAttributeSet();
         StyleConstants.setUnderline(attributeSet, true);
@@ -552,12 +605,17 @@ public class TextFrame extends JFrame {
                 attributeSet, true);
     }
 
-
+    /**
+     * This method is for removing the underline function after the correction.
+     */
     public static void removeUnderLine(){
         SimpleAttributeSet attributeSet = new SimpleAttributeSet();
         textArea.getStyledDocument().setCharacterAttributes(0, textArea.getText().length(), attributeSet, true);
     }
 
+    /**
+     * this method is for creating the right click menu
+     */
     public void populateMenu(){
         rightClickMenu = new RightClickMenu();
         String text = "";
@@ -644,6 +702,13 @@ public class TextFrame extends JFrame {
         }
     }
 
+    /**
+     * This method is for replacing the misspelled word according to user selection
+     * or replacing the correct spelled word with its synonyms.
+     * @param orig original version of the selected word
+     * @param news if the orig is misspelled word, news will be the correct version of it
+     * or if the orig is correct spelled word, the news will be one of the synonym of it.
+     */
     public static void replaceText(String orig, String news){
         news = news + " ";
         for(Word word: synonyms){

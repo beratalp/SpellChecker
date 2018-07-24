@@ -1,17 +1,17 @@
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
-import java.awt.*;
-import javax.swing.*;
 
 /**
- * Auto Generated Java Class.
+ * @author 404 Not Found
+ * @version 24.07.2018
  */
 public class SetFontDialog extends JDialog{
-
     private JButton applyButton;
     private JComboBox<Font> fontBox;
 
+    //Constructor
     public SetFontDialog() {
         setTitle("Set Font");
         applyButton =  new JButton("Apply");

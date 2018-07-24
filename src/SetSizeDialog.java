@@ -1,15 +1,17 @@
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Collections;
+
+/**
+ * @author 404 Not Found
+ * @version 24.07.2018
+ */
 
 public class SetSizeDialog extends JDialog {
-
-
     private JSpinner spinner;
     private JButton applyButton;
+    //Constructor
     public SetSizeDialog(){
         setLayout(new FlowLayout(FlowLayout.CENTER ,100,10));
         applyButton = new JButton("Apply");
