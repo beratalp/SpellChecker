@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 /**
+ * This class implements Bing and WordAPI API's for SpellChecking and Synonym Finding
  * @author 404 Not Found
  * @version 0.2
  */
@@ -33,6 +34,12 @@ public class SpellCheckerOnline extends SpellChecker {
     private JSONObject json;
     private JSONArray jsonArray;
 
+    /**
+     *
+     * @return true if the computer is connected, false if not
+     * @throws InterruptedException if process gets interrupted
+     * @throws IOException if there is something wrong with Google
+     */
     public static boolean isConnectionWorks() throws InterruptedException, IOException {
         String command;
         if (System.getProperty("os.name").startsWith("Windows")){
@@ -47,11 +54,24 @@ public class SpellCheckerOnline extends SpellChecker {
         return reachable;
     }
 
+    /**
+     * GrammarCheck is done within the spellCheck function
+     * @param str String to run on
+     * @param lang Language to operate
+     * @return always null
+     */
     @Override
     public ArrayList<Word> grammarCheck(String str, Language lang) {
         return null;
     }
 
+    /**
+     * SpellChecker that uses Bing SpellChecking API
+     * @param str String to run on
+     * @param lang Language to operate
+     * @return ArrayList of word objects
+     * @throws Exception if there is something wrong
+     */
     @Override
     public ArrayList<Word> spellCheck(String str, Language lang) throws Exception{
         wordList = new ArrayList<Word>();
@@ -94,6 +114,12 @@ public class SpellCheckerOnline extends SpellChecker {
         return wordList;
     }
 
+    /**
+     * Synonym Finder that uses WordsAPI
+     * @param str String to find synonyms of
+     * @param lang language to search
+     * @return ArrayList of Word objects
+     */
     @Override
     public ArrayList<Word> findSynonyms(String str, Language lang) {
         Scanner stringScanner = new Scanner(str);
@@ -131,11 +157,20 @@ public class SpellCheckerOnline extends SpellChecker {
         return words;
     }
 
+    /**
+     * Initializes Key for the Bing API
+     * @throws IOException if the key.txt is not accessible
+     */
     public void initializeKey() throws IOException{
         key = new Key(keyfile);
         keyString = key.getKeyString();
     }
 
+    /**
+     * Sets language of the SpellChecker
+     * @param lang Language, supports only ENGLISH and TURKISH
+     * @return Language String
+     */
     private String setLanguage(Language lang){
         if(lang == Language.ENGLISH){
             mode = "proof";

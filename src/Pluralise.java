@@ -1,11 +1,14 @@
-//Convert the word followed by an integer other than 1 into plural
-
+/**
+ * This class has methods for pluralizing singular items
+ * @author 404 Not Found
+ * @version 0.2
+ */
 public class Pluralise
 {
   
   /**
    * checks for words followed by an integer and pluralizes them
-   * @param str - the string
+   * @param input - the string
    * @return original string with nouns pluralised where necessary
    */
   public static String pluralizeAll(String input)

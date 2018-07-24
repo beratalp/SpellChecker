@@ -1,19 +1,45 @@
 import java.util.*;
 
 /**
+ * This class extends SpellChecker class and includes methods for offline spell and grammar checking
  * @author 404 Not Found
- * @version 24.07.2018
+ * @version 0.2
  */
 
 public class SpellCheckerOffline extends SpellChecker {
+
+    private Dictionary dictionary;
+    final static String filePath = "dict.txt";
+    final static char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+
+    SpellCheckerOffline()
+    {
+        super();
+        dictionary = new Dictionary();
+        dictionary.createDictionary(filePath);
+    }
+
+    /**
+     * This method runs grammar checking methods on the given String
+     * @param str String to run on
+     * @param lang Language to operate (Only in English for now)
+     * @return ArrayList of words
+     */
     @Override
     public ArrayList<Word> grammarCheck(String str, Language lang) {
         ArrayList<Word> words = new ArrayList<>();
         TextFrame.textArea.setText(repetitionRemover(TextFrame.textArea.getText()));
         TextFrame.textArea.setText(Pluralise.pluralizeAll(TextFrame.textArea.getText()));
+        TextFrame.textArea.setText(capitalStop(TextFrame.textArea.getText()));
         return words;
     }
 
+    /**
+     * This method runs spell checking methods on the given String
+     * @param str String to run on
+     * @param lang Language to operate (Only in English for now)
+     * @return ArrayList of words
+     */
     @Override
     public ArrayList<Word> spellCheck(String str, Language lang) {
         ArrayList<Word> words = new ArrayList<>();
@@ -35,63 +61,23 @@ public class SpellCheckerOffline extends SpellChecker {
         return words;
     }
 
+    /**
+     * Not implemented yet
+     * @param str String to run on
+     * @param lang Language to operate
+     * @return null
+     */
     @Override
     public ArrayList<Word> findSynonyms(String str, Language lang) {
         return null;
     }
 
-    private Dictionary dictionary;
-    final static String filePath = "dict.txt";
-    final static char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 
-    SpellCheckerOffline()
-    {
-        dictionary = new Dictionary();
-        dictionary.createDictionary(filePath);
-    }
-
-
-    public void run()
-    {
-        Scanner scan = new Scanner(System.in);
-        String input;
-
-        while (true)
-        {
-            System.out.print("\nEnter a word: ");
-            input = scan.nextLine();
-            if (input.equals(""))
-            {
-                break;
-            }
-            if (dictionary.contains(input))
-            {
-                System.out.println("\n" + input + "Word is spelled correctly!");
-            }
-            else
-            {
-                System.out.print("Word is not spelled correctly! ");
-                System.out.println(printAlternatives(input));
-            }
-        }
-    }
-
-    public String printAlternatives(String input)
-    {
-        StringBuilder x = new StringBuilder();
-        ArrayList<String> alternatives = findAlternatives(input);
-        if (alternatives.size() == 0)
-        {
-            return "Cannot find any alternative words!\n";
-        }
-        x.append("Alternative Words:\n");
-        for (String s : alternatives)
-        {
-            x.append("\n" + s);
-        }
-        return x.toString();
-    }
-
+    /**
+     * Finds alternative words to a given String
+     * @param input the word
+     * @return ArrayList of alternative Strings
+     */
     public ArrayList<String> findAlternatives(String input)
     {
         ArrayList<String> altList = new ArrayList<String>();
@@ -101,6 +87,11 @@ public class SpellCheckerOffline extends SpellChecker {
         return altList;
     }
 
+    /**
+     * inserts every letter at the start or at the end to find the possible correct word
+     * @param input, the word to manipulte
+     * @return the alternate word if it is present in the dictionary
+     */
     public ArrayList<String> endCharMissing(String input)
     {
         ArrayList<String> altList = new ArrayList<String>();
@@ -119,7 +110,11 @@ public class SpellCheckerOffline extends SpellChecker {
         }
         return altList;
     }
-
+    /**
+     * removes a character in the word one by one to find a match
+     * @param input, the word to be manipulated
+     * @return the alternate word if it is present in the dictionary
+     */
     public ArrayList<String> extraCharAdded(String input)
     {
         ArrayList<String> altList = new ArrayList<String>();
@@ -150,7 +145,11 @@ public class SpellCheckerOffline extends SpellChecker {
         return altList;
     }
 
-
+    /**
+     * outputs the permutations of the given word
+     * @param input, the word to be permutated
+     * @return the list containing all the possible permutations
+     */
     public ArrayList<String> permutate(String input)
     {
         ArrayList<String> result = new ArrayList<String>();
@@ -177,7 +176,11 @@ public class SpellCheckerOffline extends SpellChecker {
             return result;
         }
     }
-
+    /**
+     * swaps every character turn by turn to find a match
+     * @param word, the word to manipulte
+     * @return the list of wors which are present in the dictionary
+     */
     public ArrayList<String> charsSwapped(String word)
     {
         ArrayList<String> permutations = permutate(word);
@@ -193,7 +196,11 @@ public class SpellCheckerOffline extends SpellChecker {
         }
         return resultList;
     }
-
+    /**
+     * this method removes consecutive repetition in a String
+     * @param arg, the string to be corrected
+     * @return String nonDuplicate, the corrected sentence
+     */
     public static String repetitionRemover(String arg)
     {
         String[] words = arg.split("\\W+");
@@ -209,6 +216,33 @@ public class SpellCheckerOffline extends SpellChecker {
         }
         String nonDuplicate = stringBuilder.toString().trim();
         return nonDuplicate;
+    }
+    /**
+     * this method makes the first word start with a capital Char and a full-stop at the end
+     * @param arg, the string to be corrected
+     * @return String correctSentence, the corrected sentence
+     */
+    public static String capitalStop (String arg)
+    {
+        char temp = arg.charAt(0);
+        String correctSentence = "";
+        //Make it upper case
+        temp = Character.toUpperCase(temp);
+
+        correctSentence  = Character.toString(temp);
+
+        correctSentence = correctSentence + arg.substring(1);
+
+        temp = correctSentence.charAt(arg.length()-1);
+
+        if(temp!= '.' && temp !='?' && temp != '!')
+        {
+            correctSentence = correctSentence + ".";
+        }
+        return correctSentence;
+
+
+
     }
 }
 

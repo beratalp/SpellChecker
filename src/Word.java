@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * This class is for handling all words in a certain String.
  * @author 404 Not Found
- * @verison 24.07.2018
+ * @verison 0.2
  */
 
 public class Word {

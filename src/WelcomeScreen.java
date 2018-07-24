@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * This program is for demonstrating the text frame and its functionality
+ * This class creates a JFrame as a WelcomeScreen, and also includes a main method for accessing other functions of the application
  * @author 404 Not Found
  * @version 0.2
  */

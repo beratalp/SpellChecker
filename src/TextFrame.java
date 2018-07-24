@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 /**
  * This class is for defining a TextFrame object that extends JFrame. This class defines all the GUI methods and elements that are used by itself.
@@ -350,10 +351,16 @@ public class TextFrame extends JFrame {
                     spellChecker.Error(exception);
                 }
                 try{
-                    label.setText("Word Count: " + synonyms.size() + "\t" + "Misspelled Words: " + (words.size() - synonyms.size()));
+                    label.setText("Word Count: " + synonyms.size() + " " + "Misspelled Words: " + (words.size() - synonyms.size()));
                 }
                 catch(Exception ex){
-                    label.setText("Word Count: " + words.size());
+                    int misSpellCount = 0;
+                    for(Word word: words){
+                        if(word.isWrong()){
+                            misSpellCount++;
+                        }
+                    }
+                    label.setText("Word Count: " + words.size() + " " + "Misspelled Words: " + misSpellCount);
                 }
             } else if ( e.getSource().equals(buttonOpenFile) ){
                 JFileChooser fc = new JFileChooser();
@@ -516,6 +523,14 @@ public class TextFrame extends JFrame {
                         file.saveFile(new File(file.getPath()), textArea.getText());
                     }
                     catch (Exception ex){
+                        SpellChecker.Error(ex);
+                    }
+                }
+            } else if(e.getSource() == forum){
+                if (Desktop.isDesktopSupported()) {
+                    try {
+                        Desktop.getDesktop().browse(new URI("http://sp3llinspector.createaforum.com"));
+                    } catch (Exception ex) {
                         SpellChecker.Error(ex);
                     }
                 }

@@ -6,7 +6,11 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URI;
-
+/**
+ * This class is used for showing information about the application in a JFrame
+ * @author 404 Not Found
+ * @version 0.2
+ */
 public class About extends JFrame {
     private JPanel panelTop = new JPanel();
     private JLabel label = new JLabel(SpellChecker.APP_NAME + " " + SpellChecker.VERSION , SwingConstants.CENTER);
@@ -19,6 +23,10 @@ public class About extends JFrame {
     private JLabel mailHassam = new JLabel("Hassam Abdullah - hassamabdullah1@gmail.com");
     private JLabel mailUmer = new JLabel("Umer Shamaan - shamaan0086@gmail.com");
     private JLabel licence = new JLabel( "<html><p>Icons form LibreOffice Project <br/> Apache HTTP Libraries from Apache Foundation <br/> Simple JSON Library by Yidong Fang <br/> unirest HTTP Request Libraries by Mashape </p></html>" );
+
+    /**
+     * Creates an empty About object
+     */
     public About(){
         panel1.setLayout( new FlowLayout( FlowLayout.LEFT,0,10) ) ;
         panel2.setLayout(new BorderLayout());
@@ -27,6 +35,7 @@ public class About extends JFrame {
         panel1.add(mailSalman);
         panel1.add(mailHassam);
         panel1.add(mailUmer);
+        setTitle("About");
         addMouseListeners();
         label.setForeground(Color.white);
         panelTop.setBackground(Color.decode("#455A64"));
@@ -64,6 +73,9 @@ public class About extends JFrame {
         mailHassam.addMouseListener( new mouseEvent());
     }
 
+    /**
+     * This inner class implements mail addresses for their respective developers
+     */
     public class mouseEvent implements MouseListener {
         public void mouseClicked(MouseEvent e) {
             if( e.getSource() == mailAlp ){

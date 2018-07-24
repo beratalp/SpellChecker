@@ -1,14 +1,20 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.*;
-
+/**
+ * This class is used for handling offline dictionary file
+ * @author 404 Not Found
+ * @version 0.2
+ */
 public class Dictionary
 {
     //data members
     static final int BUCKET_COUNT = 1723 ;
     final private Bucket[] bucketList;
 
-    //constructor
+    /**
+     * Creates a new Dictionary object
+     */
     public Dictionary()
     {
         bucketList = new Bucket[BUCKET_COUNT];
@@ -72,7 +78,9 @@ public class Dictionary
         }
     }
 
-
+    /**
+     * This inner class defines a Bucket that holds Nodes
+     */
     class Bucket
     {
         private Node start;
@@ -108,6 +116,9 @@ public class Dictionary
             start = new Node(word, start); //search miss: adding a new node
         }
 
+        /**
+         * This inner class implements a node with links
+         */
         class Node
         {
             String data;

@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 /**
  *This class is for creating the right click menu for text area.
  * @author 404 Not Found
- * @version 24.07.2018
+ * @version 0.2
  */
 
 public class RightClickMenu extends JPopupMenu {
