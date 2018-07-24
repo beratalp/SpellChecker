@@ -13,7 +13,23 @@ public class SpellCheckerOffline extends SpellChecker {
 
     @Override
     public ArrayList<Word> spellCheck(String str, Language lang) {
-        return null;
+        ArrayList<Word> words = new ArrayList<>();
+        ArrayList<String> strings = new ArrayList<>(Arrays.asList(str.split(" ")));
+        for(String s: strings){
+            Word word = new Word();
+            ArrayList<String> suggestions = findAlternatives(s);
+            word.setOrig(s);
+            word.setIndex(str.indexOf(s));
+            if(!dictionary.contains(s)){
+                System.out.println(s);
+                word.setWrong(true);
+            }
+            for(String sugg: suggestions){
+                word.addSuggestion(sugg);
+            }
+            words.add(word);
+        }
+        return words;
     }
 
     @Override
@@ -22,7 +38,7 @@ public class SpellCheckerOffline extends SpellChecker {
     }
 
     private Dictionary dictionary;
-    final static String filePath = "E:/Project/dict.txt";
+    final static String filePath = "dict.txt";
     final static char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 
     SpellCheckerOffline()

@@ -81,7 +81,7 @@ public class TextFrame extends JFrame {
 
     private TextFile file;
     private static ArrayList<Word> words;
-    private static ArrayList<Word> synonyms;
+    private static ArrayList<Word> synonyms = new ArrayList<>();
 
     private static float textSize = 12;
     private static Font textFont;
@@ -324,16 +324,25 @@ public class TextFrame extends JFrame {
                     label.setText("Finding synonyms...");
                     synonyms = spellChecker.findSynonyms(textArea.getText(), SpellChecker.Language.ENGLISH);
                     for(Word word: words){
-                        System.out.println(word.getOrig());
-                        underLineWord(word.getOrig(), word.getIndex());
+                        if(word.isWrong())
+                            underLineWord(word.getOrig(), word.getIndex());
                     }
-                    for(Word word: synonyms){
-                        words.add(word);
+                    try{
+                        for(Word word: synonyms){
+                            words.add(word);
+                        }
+                    }
+                    catch (Exception ex){
                     }
                 } catch (Exception exception) {
                     spellChecker.Error(exception);
                 }
-                label.setText("Word Count: " + words.size() + "\t" + "Misspelled Words: " + (words.size() - synonyms.size()));
+                try{
+                    label.setText("Word Count: " + words.size() + "\t" + "Misspelled Words: " + (words.size() - synonyms.size()));
+                }
+                catch(Exception ex){
+                    label.setText("Word Count: " + words.size());
+                }
             } else if ( e.getSource().equals(buttonOpenFile) ){
                 JFileChooser fc = new JFileChooser();
                 int returnVal = fc.showOpenDialog(null);
@@ -711,10 +720,15 @@ public class TextFrame extends JFrame {
      */
     public static void replaceText(String orig, String news){
         news = news + " ";
-        for(Word word: synonyms){
-            if(word.getOrig().equals(orig)){
-                news.trim();
+        try{
+            for(Word word: synonyms){
+                if(word.getOrig().equals(orig)){
+                    news.trim();
+                }
             }
+        }
+        catch (Exception e){
+
         }
         textArea.setText(textArea.getText().replaceFirst(orig, news));
         removeUnderLine();
