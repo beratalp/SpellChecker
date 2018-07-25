@@ -780,6 +780,7 @@ public class TextFrame extends JFrame {
 
         }
         textArea.setText(textArea.getText().replaceFirst(orig, news));
+        System.out.println("debug");
         removeUnderLine();
         for(int i = 0; i < words.size(); i ++){
             if(words.get(i).getOrig().equals(orig) && words.get(i).isWrong()){

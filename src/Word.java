@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * This class is for handling all words in a certain String.
  * @author 404 Not Found
- * @verison 0.2
+ * @version 0.2
  */
 
 public class Word {
@@ -68,8 +68,8 @@ public class Word {
     }
 
     /**
-     * This method is for checking whether this word is correctly or not
-     * return boolean
+     * This method is for checking whether this word is spelled correctly or not
+     * @return true if spelled correctly, false if not
      */
     public boolean isWrong() {
         return isWrong;

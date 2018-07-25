@@ -47,7 +47,7 @@ public class Pluralise
   
   /**
    * conerts a noun into a plural
-   * @param word 
+   * @param word word to pluralize
    * @return the converted string
    */ 
   public static String pluralize(String word)

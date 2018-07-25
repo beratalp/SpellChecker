@@ -12,7 +12,7 @@ public class TextFile {
 
     /**
      * Constructs an empty TextFile
-     * @throws IOException
+     * @throws IOException in case new file can't be created
      */
     public TextFile() throws IOException{
         this.file = new File("untitled.txt");

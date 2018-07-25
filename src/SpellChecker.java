@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * This is an abstract class defines of how a SpellChecker would work, and also includes helper classes to handle Exceptipons
  * @author 404 Not Found
- * @verison 0.2
+ * @version 0.2
  */
 public abstract class SpellChecker {
     public final static String VERSION = "0.2";
